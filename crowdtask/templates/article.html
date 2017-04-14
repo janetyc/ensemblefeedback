@@ -1,0 +1,35 @@
+{% extends "clean_base.html" %}
+{% block content %}
+<span><a href="{{ url_for('views.index')}}">All Articles</a> > Article {{ data.id }}</span>
+<header>
+    {{data.title}}({{data.authors}})
+    <span class="feedback-vis">
+    {% if data.peer_result[0] %}
+        <a href="{{ url_for('vis_views.peer_vis', article_id=data.id)}}"><i class="student icon"></i>Peers({{data.peer_result[1]}})</a>
+    {% else %}
+        <i class="student icon"></i>Peers
+    {% endif %}
+    | 
+    {% if data.crowd_result[0] %}
+        <a href="{{ url_for('vis_views.topic_vis')}}?workflow_id={{data.crowd_result[1]}}"><i class="user icon"></i>Crowds</a>
+    {% else %}
+        <i class="user icon"></i>Crowds
+    {% endif %}
+    </span>
+</header>
+<section>
+    {% if data.show_workflow %}
+        <div>Workflow: 
+        {% for workflow_id in data.workflow_list %}
+            <a href="{{ url_for('vis_views.topic_vis')}}?workflow_id={{workflow_id}}" class="small-block">{{ workflow_id }}</a>
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% for paragraph in data.paragraphs %}
+        <p>{{ paragraph[1] }}</p>
+    {% endfor %}
+</section>
+<div class="annotation-button">
+    <a class="ui button primary tiny" href="{{ url_for('views.peer_annotation', article_id=data.id)}}">Annotate</a>
+</div>
+{% endblock %}
