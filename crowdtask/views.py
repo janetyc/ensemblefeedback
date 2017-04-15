@@ -4,11 +4,22 @@ import string
 from flask import Blueprint, Flask, request, render_template, redirect, url_for, jsonify
 from crowdtask.dbquery import DBQuery
 
-
+per_page = 10
 views = Blueprint('views', __name__, template_folder='templates')
 
 
-@views.route('/')
+@views.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
+
+
+@views.route('/get_feedback_index', methods=['GET', 'POST'])
+@views.route('/get_feedback_index/<int:page>', methods=['GET', 'POST'])
+def get_feedback_index(page=1):
+    paginated_articles = DBQuery().get_article_paginate(page, per_page)
+    return render_template('get_feedback_index.html', paginated_articles=paginated_articles)
+
+@views.route('/all')
 def show_all():
 
     all_articles = DBQuery().get_all_articles()    
@@ -36,47 +47,20 @@ def show_all():
 
 @views.route('/comparison', methods=('GET','POST'))
 def comparison_task():
+    #generate verified_code
+    verified_string = generate_verified_str(6)
+
+
     data = []
     return render_template('comparison_task.html', data=data)
 
 @views.route('/article/<article_id>', methods=('GET','POST'))
 def show_article(article_id):
 
-    if request.args.has_key('show_workflow'):
-        show_workflow = request.args.get('show_workflow')
-    else:
-        show_workflow = 0
 
     article = DBQuery().get_article_by_id(article_id)
     paragraphs = article.content.split("<BR>")
-    workflows = DBQuery().get_workflows_by_article_id(article_id)
     
-    complete_workflow_list = []
-    have_topic=False
-    have_relevance=False
-    for workflow in workflows:
-        if workflow.topic_hit_ids and workflow.topic_hit_ids != "":
-            have_topic = True
-
-        if workflow.relevance_hit_ids and workflow.relevance_hit_ids != "":
-            have_relevance = True
-        
-        if have_topic and have_relevance:
-            complete_workflow_list.append(str(workflow.id))
-
-    # crowd result
-    if len(complete_workflow_list):
-        crowd_result = (True, complete_workflow_list[0])
-    else:
-        crowd_result = (False, None)
-
-    peer_count = DBQuery().get_peer_count_by_article_id(article_id)
-    if peer_count:
-        peer_result = (True, peer_count)
-    else:
-        peer_result = (False, peer_count)
-
-    workflow_list = [str(workflow.id) for workflow in workflows]
 
     list = []
     for i, paragraph in enumerate(paragraphs):
@@ -88,10 +72,7 @@ def show_article(article_id):
        "title": article.title,
        "authors": article.authors,
        "paragraphs": list,
-       "workflow_list": workflow_list,
-       "show_workflow": show_workflow,
-       "crowd_result": crowd_result,
-       "peer_result": peer_result
+
     }
 
     return render_template('article.html', data=data)

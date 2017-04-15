@@ -5,12 +5,23 @@
 
 > pip install virtualenvwrapper
 
+- create a virtual enviornment & install package
+
+> mkvirtualenv ensemble
+
+> workon ensemble
+
+> pip install -r requirements.txt
+
 - 檢查是否有裝Postgres
 
 > which psql  
 
 
 ### How to run the app locally
+
+> heroku local web
+
 [https://devcenter.heroku.com/articles/getting-started-with-python#run-the-app-locally](https://devcenter.heroku.com/articles/getting-started-with-python#run-the-app-locally)
 
 
