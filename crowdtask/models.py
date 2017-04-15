@@ -70,3 +70,19 @@ class Comparison(db.Model):
     def __repr__(self):
         return '<Topic %r>' % self.created_user
 
+class Comment(db.Model):
+    __tablename__ = 'comment'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    location = db.Column(db.Integer())
+    content = db.Column(db.Text())
+
+    def __init__(self, location, content):
+        self.location = location
+        self.content = content
+        
+
+    def __repr__(self):
+        return '<Comment %r>' % self.content
+
+

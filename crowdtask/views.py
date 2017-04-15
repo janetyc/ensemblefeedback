@@ -51,7 +51,9 @@ def comparison_task():
     verified_string = generate_verified_str(6)
 
 
-    data = []
+    data = {
+        "verified_string": verified_string
+    }
     return render_template('comparison_task.html', data=data)
 
 @views.route('/article/<article_id>', methods=('GET','POST'))
