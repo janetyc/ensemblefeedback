@@ -30,15 +30,20 @@
 - please make sure "environment variables ENV=DEVELOPMENT", which means local database and local server
 - init database at *local side*
 > python manage.py db init  #only do it at first time
+> 
 > python manage.py db migrate
+> 
 > python manage.py db upgrade
 - if database scheme changes, do database migration and update
 > python manage.py db migrate
+> 
 > python manage.py db upgrade
 
 - push migrations folder to *server*
 > git add migrations/*
+> 
 > git commit "db migrations"
+> 
 > git push origin master
 
 - only run db upgrade at remote server
@@ -46,9 +51,12 @@
 
 ### How to import local files into remote database
 - setup local environment variables
-> export ENV=TESTING
-> export DATABASE_URL=<db_URL>
-> python manage.py import_articles
+
+	> export ENV=TESTING
+	> 
+	> export DATABASE_URL=<db_URL>
+	> 
+	> python manage.py import_articles
 
 ### How to deal with out of sync between remote db and local db
 - check the current version of both databases
@@ -61,6 +69,10 @@
 
 -  set the correct version for remote db
 > heroku run python manage.py db stamp HEAD or
-> heroku run python manage.py db stamp <revision> #Sets the revision in the database to the one given as an argument, without performing any migrations.
+> 
+> // Sets the revision in the database to the oe given as an argument, without performing any migrations.
+> 
+> heroku run python manage.py db stamp <revision> 
+> 
 > heroku run python manage.py db upgrade
 

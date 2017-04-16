@@ -1,0 +1,51 @@
+#history{
+  overflow: scroll;
+  margin: 10px 0px;
+  width: 80%;
+}
+#origin{
+  vertical-align: top;
+  padding: 20px 10px 10px 10px;
+}
+#arrow{
+  height: 10px;
+  width: 200px;
+}
+#content{
+  font-size: 120%;
+}
+.header{
+  height: 1%;
+}
+.footnote{
+  height: 1%;
+}
+.blackborder{
+  margin: 10px 10px 0px 50px;
+  border: 1px solid #000000;
+}
+.half{
+  height: 250px;
+  overflow: scroll;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #DADADA;
+}
+.mod{
+  /*margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  line-height: 20px;*/
+}
+.mod_0{
+  background-color: #ccf2ff ;
+}
+.mod_1{
+  background-color: #ebf5d6 ;
+}
+.mod_2{
+  background-color: #ffcce6 ;
+}
+.title:hover {
+  background-color: LightGray;
+}

@@ -1,0 +1,59 @@
+{% extends "clean_base.html" %}
+
+{% block customize_css %}
+<link rel="stylesheet" href="/static/css/ensemble_styles.css">
+<link rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.css" />
+{% endblock %}
+
+{% block content2 %}
+    <table align='center'>
+        <tr>
+            <td style='width: 75%;'>
+                <div id='origin' class='blackborder'>
+                    <div style='text-align: right;'> Time left:
+                      <span id='clock'>00 min 00 sec</span>
+                    </div>
+                    <h2 id='title' align='center'>My First Heading</h2>
+                    <div class="half mCustomScrollbar" data-mcs-theme="inset-2-dark">
+                        <p id='content'>My first paragraph.</p>
+                    </div>
+                    <div class="ui form">
+                        <div class="field">
+                            <h3><br>Editing Area for revision #<span id='version'>3</span>:</h3>
+                            <textarea rows="10" style="font-size: 120%;"></textarea>
+                            <grammarly-btn>
+                                <div data-reactroot="" class="_e725ae-textarea_btn _e725ae-anonymous _e725ae-not_focused">
+                                    <div class="_e725ae-transform_wrap">
+                                        <div title="Protected by Grammarly" class="_e725ae-status">&nbsp;</div>
+                                    </div>
+                                </div>
+                            </grammarly-btn>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <div id='history' class='ui styled accordion'>
+                    </div>
+                    <div class="ui animated button" tabindex="0" onclick="nextstage()">
+                        <div id='btn_next' class="visible content">
+                          Next
+                        </div>
+                        <div class="hidden content">
+                            <i class="right arrow icon"></i>
+                        </div>
+                    </div>
+                    <!-- <div class="ui huge star rating"></div> -->
+                </div>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="/static/js/ensemble_script.js"></script>
+<script type="text/javascript" src="/static/js/ensemble_ui.js"></script>
+{% endblock %}
