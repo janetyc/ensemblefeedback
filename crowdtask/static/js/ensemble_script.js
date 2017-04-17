@@ -126,7 +126,6 @@ function nextstage(){
       btn.innerHTML='Finish';
       btn.parentNode.setAttribute('onclick','finish()');
     }
-
   }else if($order == "LMH"){
 
     mod_list = document.getElementsByClassName('mod_'+$str);

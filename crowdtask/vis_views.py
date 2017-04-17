@@ -11,11 +11,15 @@ vis_views = Blueprint('vis_views', __name__, template_folder='templates')
 def ensemble_vis(feedback_id):
 
     feedback = DBQuery().get_feedback_by_id(feedback_id)
-    article_id = feedback.article_id
-    content = feedback.content.strip()
-    feedback_content = feedback.feedback_content
-    content_list = content.split("\n")
-    article_content = "\n".join(content_list)
+    article_id = None
+    article_content = ""
+    feedback_content = ""
+    if feedback:        
+        article_id = feedback.article_id
+        content = feedback.content.strip()
+        feedback_content = feedback.feedback_content
+        content_list = content.split("\n")
+        article_content = "\n".join(content_list)
 
     data = {
         "article_id": article_id,
