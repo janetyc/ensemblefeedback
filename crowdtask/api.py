@@ -1,7 +1,10 @@
+import json
+
 from flask import Blueprint, Flask, request, render_template, redirect, url_for, jsonify
 from crowdtask.dbquery import DBQuery
 from enum import TaskType
 from datetime import datetime
+
 
 api = Blueprint('api', __name__, template_folder='templates')
 
@@ -38,3 +41,28 @@ def add_article():
         return jsonify(success=1, data=data)
     else:
         return jsonify(success=0, data=[])
+
+@api.route('/api/add_revision', methods=('GET','POST'))
+def add_revision():
+    if request.method == 'POST':
+        created_user = request.form['created_user']
+        article_id = int(request.form['article_id'])
+        feedback_id = int(request.form['feedback_id'])
+        feedback_content = json.loads(request.form['feedback_content'])
+        revision_content = json.loads(request.form['revision_content'])
+        duration_time = int(request.form['duration_time'])
+        
+        revision_id = DBQuery().add_revision(created_user, article_id, feedback_id, feedback_content, revision_content, duration_time)
+
+        data = {
+            "created_user": created_user,
+            "article_id": article_id,
+            "feedback_id": feedback_id,
+            "feedback_content": feedback_content,
+            "duration_time": duration_time
+        }
+
+        return jsonify(success=1, data=data)
+    else:
+        return jsonify(success=0, data=[])        
+    

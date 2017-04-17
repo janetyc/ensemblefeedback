@@ -2,17 +2,32 @@ $title = [
   'Content & Organization','Language use','Machanics','Others'
 ]
 
-$str = getQueryVariable('str');
-$txt = getQueryVariable('txt');
-$json = getQueryVariable('json');
-$timer = 60*10; // seconds to count down
+$order = getParameterByName('order');
+$version = 0;
+if($order == 'HML') $str = 0;
+else if($order == 'LMH') $str = 2;
+else $str = -1;
+$txt = getParameterByName('txt');
+$json = getParameterByName('json');
+//$txt = getQueryVariable('txt');
+//$json = getQueryVariable('json');
+$timer = 0; // seconds to count down
+$revisionArray = new Array();
 window.setInterval(everysecond, 1000);
 everysecond();
 
-if($txt>0) readTextFile($txt);
-else readTextFile("/static/feedback-data/doc_origin.docx.txt");
-if($json>0) readJson($json);
-else readJson("/static/feedback-data/doc_mod.json");
+// if($txt>0) readTextFile($txt);
+// else readTextFile("/static/feedback-data/doc_origin.docx.txt");
+// if($json>0) readJson($json);
+// else readJson("/static/feedback-data/doc_mod.json");
+
+
+var content = $("#article_content").attr("content");
+var json_content = $("#feedback_content").attr("content");
+
+loadText(content);
+loadJSON(json_content);
+
 
 function disable(e){
   e.setAttribute("class",'ui disabled button');
@@ -29,44 +44,163 @@ function disable(e){
 
 function finish(){
   console.log("Finish");
-  return 0;
+  //return 0;
   // TODO: Send $time and the Edit Area to server.
+  var results = new Array();
+  $(".feedback").each(function(i, val){
+    var item_result = $(this).find(".title").attr("result");
+    var rating = $(this).find(".title .rating .active").length;
+    var action = (typeof item_result === "undefined" ? "None" : item_result);
+    var item = {
+      "id": i,
+      "type_name": $title[ parseInt($(this).attr("type_id")) ],
+      "type_id": $(this).attr("type_id"),
+      "rating": rating,
+      "action": action
+    }
+    results.push(item);
+  });
+
+  $.ajax({
+      type: "POST",
+      url: "/api/add_revision",
+      data: {
+          "article_id": $("#article_id").attr("content"),
+          "created_user": "",
+          "feedback_id": $("#feedback_id").attr("content"),
+          "feedback_content": JSON.stringify(results),
+          "revision_content": JSON.stringify($revisionArray),
+          "duration_time": $timer
+      },
+      dataType: 'json', 
+      
+      success: function(data) {
+          if(data['success'] == 1){
+            alert("Success");
+          }
+      },
+      beforeSend: function(){
+          $('#loading-image').show();
+      },
+      complete: function(){
+          $('#loading-image').hide();
+                      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("Error");    
+      }
+  });
+  
 }
 
 function nextstage(){
-  if($str>2 || $str<0){
-    finish();
-    return 0;
-  }
-  if($str==2){
+  
+  if($order == "HML"){
+    
+    mod_list = document.getElementsByClassName('mod_'+$str);
+    for(i=0;i<mod_list.length;i++){
+        if(mod_list[i].getAttribute('class').includes('title'))
+          mod_list[i].style.display = 'none';
+        else {
+          mod_list[i].setAttribute('style','background-color: White;');
+        }
+    }
+
+    mod_list = document.getElementsByClassName('mod_'+($str+1));
+    for(i=0;i<mod_list.length;i++){
+        e = mod_list[i];
+        if(!e.getAttribute('class')) continue
+        else if(e.getAttribute('class').includes('mod_0'))
+          e.setAttribute('style','background-color: #ccf2ff ;');
+        else if(e.getAttribute('class').includes('mod_1'))
+          e.setAttribute('style','background-color: #ebf5d6 ;');
+        else if(e.getAttribute('class').includes('mod_2'))
+          e.setAttribute('style','background-color: #ffcce6 ;');
+    }
+    $str++;
+    $version++;
+
+    document.getElementById('version').innerHTML = $version;
+
+    if($version>2){
+      btn = document.getElementById('btn_next')
+      btn.innerHTML='Finish';
+      btn.parentNode.setAttribute('onclick','finish()');
+    }
+
+  }else if($order == "LMH"){
+
+    mod_list = document.getElementsByClassName('mod_'+$str);
+    for(i=0;i<mod_list.length;i++){
+        if(mod_list[i].getAttribute('class').includes('title'))
+          mod_list[i].style.display = 'none';
+        else {
+          mod_list[i].setAttribute('style','background-color: White;');
+        }
+    }
+
+    mod_list = document.getElementsByClassName('mod_'+($str-1));
+    for(i=0;i<mod_list.length;i++){
+        e = mod_list[i];
+        if(!e.getAttribute('class')) continue
+        else if(e.getAttribute('class').includes('mod_0'))
+          e.setAttribute('style','background-color: #ccf2ff ;');
+        else if(e.getAttribute('class').includes('mod_1'))
+          e.setAttribute('style','background-color: #ebf5d6 ;');
+        else if(e.getAttribute('class').includes('mod_2'))
+          e.setAttribute('style','background-color: #ffcce6 ;');
+    }
+    $str--;
+    $version++;
+    document.getElementById('version').innerHTML = $version;
+
+    if($version>2){
+      btn = document.getElementById('btn_next')
+      btn.innerHTML='Finish';
+      btn.parentNode.setAttribute('onclick','finish()');
+    }
+
+  }else{
     btn = document.getElementById('btn_next')
     btn.innerHTML='Finish';
     btn.parentNode.setAttribute('onclick','finish()');
   }
-  mod_list = document.getElementsByClassName('mod_'+($str-1));
-  for(i=0;i<mod_list.length;i++){
-      if(mod_list[i].getAttribute('class').includes('title'))
-        mod_list[i].style.display = 'none';
-      else {
-        mod_list[i].setAttribute('style','background-color: White;');
-      }
-  }
-  mod_list = document.getElementsByClassName('mod_'+$str);
-  for(i=0;i<mod_list.length;i++){
-      e = mod_list[i];
-      if(!e.getAttribute('class')) continue
-      else if(e.getAttribute('class').includes('mod_0'))
-        e.setAttribute('style','background-color: #ccf2ff ;');
-      else if(e.getAttribute('class').includes('mod_1'))
-        e.setAttribute('style','background-color: #ebf5d6 ;');
-      else if(e.getAttribute('class').includes('mod_2'))
-        e.setAttribute('style','background-color: #ffcce6 ;');
-  }
-  document.getElementById('version').innerHTML = ++$str;
+
+  //save revision content
+  $revisionArray.push($("#revision_content").val());
+
+  // if($str>2 || $str<0){
+  //   finish();
+  //   return 0;
+  // }
+  // if($str==2){
+  //   btn = document.getElementById('btn_next')
+  //   btn.innerHTML='Finish';
+  //   btn.parentNode.setAttribute('onclick','finish()');
+  // }
+  // mod_list = document.getElementsByClassName('mod_'+($str-1));
+  // for(i=0;i<mod_list.length;i++){
+  //     if(mod_list[i].getAttribute('class').includes('title'))
+  //       mod_list[i].style.display = 'none';
+  //     else {
+  //       mod_list[i].setAttribute('style','background-color: White;');
+  //     }
+  // }
+  // mod_list = document.getElementsByClassName('mod_'+$str);
+  // for(i=0;i<mod_list.length;i++){
+  //     e = mod_list[i];
+  //     if(!e.getAttribute('class')) continue
+  //     else if(e.getAttribute('class').includes('mod_0'))
+  //       e.setAttribute('style','background-color: #ccf2ff ;');
+  //     else if(e.getAttribute('class').includes('mod_1'))
+  //       e.setAttribute('style','background-color: #ebf5d6 ;');
+  //     else if(e.getAttribute('class').includes('mod_2'))
+  //       e.setAttribute('style','background-color: #ffcce6 ;');
+  // }
+  // document.getElementById('version').innerHTML = ++$str;
 }
 
 function everysecond(){
-  if($timer%60<10)
+  /*if($timer%60<10)
     document.getElementById('clock').innerHTML = Math.floor($timer/60)+' min 0'+$timer%60+' sec';
   else {
     document.getElementById('clock').innerHTML = Math.floor($timer/60)+' min '+$timer%60+' sec';
@@ -76,18 +210,24 @@ function everysecond(){
   }
   else
     $timer--;
+  */
+  $timer++;
+}
 
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
 function getQueryVariable(variable)
 {
-       var query = window.location.search.substring(1);
-       var vars = query.split("&");
-       for (var i=0;i<vars.length;i++) {
-               var pair = vars[i].split("=");
-               if(pair[0] == variable){return parseInt(pair[1]);}
-       }
-       return(-1);
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if(pair[0] == variable){return pair[1];}
+  }
+  return(-1);
 }
 function addText(i,c){
   e = document.createElement('span');
@@ -95,6 +235,7 @@ function addText(i,c){
   e.innerHTML = c;
   return e;
 }
+
 function display(txt)
 {
     var text = txt.split('\n');
@@ -119,13 +260,13 @@ function display(txt)
       document.getElementById('content').innerHTML += '<br>';
     }
 }
-function addElement(type,id,inner){
+function addElement(type, id, inner){
    e = document.createElement(type);
    e.setAttribute("class", id);
    e.innerHTML = inner;
    return e;
 }
-function addMod(id,e_type,i_s,i_e,e_title,hist,comment,visibility){
+function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
   new_e = document.createElement("div");
   new_e.setAttribute("class", 'mod '+e_type+' title');
   new_e.setAttribute("i_start", i_s);
@@ -176,8 +317,51 @@ function addMod(id,e_type,i_s,i_e,e_title,hist,comment,visibility){
       e.setAttribute('style','background-color: white;');
     }
   }
-  document.getElementById('history').appendChild(new_e);
-  document.getElementById('history').appendChild(new_e_2);
+  var new_item = document.createElement("div");
+  
+  new_item.setAttribute("id",'feedback_'+uid);
+  new_item.setAttribute("class",'feedback');
+  new_item.setAttribute("type_id",e_type[4])
+  new_item.appendChild(new_e);
+  new_item.appendChild(new_e_2);
+  
+  document.getElementById('history').appendChild(new_item);
+  //document.getElementById('history').appendChild(new_e);
+  //document.getElementById('history').appendChild(new_e_2);
+}
+
+function loadText(text)
+{
+    display(text);
+}
+function loadJSON(jsonData){
+    var json = $.parseJSON(jsonData);
+
+    k = [1,1,1];
+    num = 0;
+    for(j = 0;j<json.length;j++){
+        e = json[j];
+        index = parseInt(e['modifier'][4]);
+        if(e['mod_type']){
+          if($str != -1) {
+            visibility = (index==$str);
+            addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],visibility);
+          }else{
+            addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],true);
+          }
+        }
+    }
+    if($str == -1){
+      btn = document.getElementById('btn_next')
+      btn.innerHTML='Finish';
+      btn.parentNode.setAttribute('onclick','finish()');
+    }
+    else {
+      document.getElementById('version').innerHTML = ++$version;
+    }
+  
+  h = $('#origin').height()-60;
+  document.getElementById('history').setAttribute('style','height: '+h+'px;');
 }
 
 function readTextFile(file)
@@ -200,18 +384,20 @@ function readTextFile(file)
 
 function readJson(file)
 {
+
   $.getJSON(file, function(json) {
     k = [1,1,1];
+    num = 0;
     for(j = 0;j<json.length;j++){
         e = json[j];
         index = parseInt(e['modifier'][4]);
         if(e['mod_type']){
           if($str>2 || $str<0){
-            addMod(k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],true);
+            addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],true);
           }
           else {
             visibility = (index==$str || $str>2 || $str==-1);
-            addMod(k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],visibility);
+            addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],visibility);
           }
         }
     }
@@ -278,10 +464,11 @@ var $middle_x = Math.floor(document.getElementById('history').offsetLeft);
 $("#origin").on("mouseover", "span", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
-  if($str<0 || $str>3)
-    var $this_list = document.getElementsByClassName('mod');
-  else {
+    
+  if($str != -1){
     var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
+  }else{
+    var $this_list = document.getElementsByClassName('mod');
   }
   for(i=0;i<$this_list.length;i++){
     var i_s = parseInt($this_list[i].getAttribute('i_start'));
@@ -296,10 +483,10 @@ $("#origin").on("mouseover", "span", function () {
 $("#origin").on("click", "span", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
-  if($str<0 || $str>3)
-    var $this_list = document.getElementsByClassName('mod');
-  else {
+  if($str != -1){
     var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
+  }else{
+    var $this_list = document.getElementsByClassName('mod');
   }
   for(i=0;i<$this_list.length;i++){
     var i_s = parseInt($this_list[i].getAttribute('i_start'));
@@ -319,10 +506,10 @@ $("#origin").on("mouseleave", "span", function () {
   $('canvas').remove();
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
-  if($str<0 || $str>3)
-    var $this_list = document.getElementsByClassName('mod');
-  else {
+  if($str != -1){
     var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
+  }else{
+    var $this_list = document.getElementsByClassName('mod');
   }
   for(i=0;i<$this_list.length;i++){
     var e = $this_list[i];
@@ -363,8 +550,8 @@ $('#history').on("mouseleave", ".mod", function () {
   }
 });
 
-$(document).ready(function(){
+// $(document).ready(function(){
     // All your normal JS code goes in here
-    $(".rating").rating();
-    $(".accordion").accordion();
-});
+    // $(".rating").rating();
+    // $(".accordion").accordion();
+// });

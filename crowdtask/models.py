@@ -1,5 +1,6 @@
 from datetime import datetime
 from crowdtask import db
+from sqlalchemy.dialects.postgresql import JSON
 
 class Article(db.Model):
     __tablename__ = 'article'
@@ -70,19 +71,47 @@ class Comparison(db.Model):
     def __repr__(self):
         return '<Topic %r>' % self.created_user
 
-class Comment(db.Model):
-    __tablename__ = 'comment'
+class Feedback(db.Model):
+    __tablename__ = 'feedback'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    location = db.Column(db.Integer())
+    article_id = db.Column(db.Integer)
     content = db.Column(db.Text())
+    feedback_content = db.Column(JSON)
+    created_time = db.Column(db.DateTime())
 
-    def __init__(self, location, content):
-        self.location = location
+    def __init__(self, article_id, content, feedback_content):
+        self.article_id = article_id
         self.content = content
-        
+        self.feedback_content = feedback_content
+        self.created_time = datetime.utcnow()
 
     def __repr__(self):
-        return '<Comment %r>' % self.content
+        return '<Feedback %r>' % self.id
+
+
+class Revision(db.Model):
+    __tablename__ = 'revision'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    created_user = db.Column(db.Text())
+    article_id = db.Column(db.Integer)
+    feedback_id = db.Column(db.Integer)
+    feedback_content = db.Column(JSON)
+    revision_content = db.Column(JSON)
+    duration_time = db.Column(db.Integer)
+    created_time = db.Column(db.DateTime())
+
+    def __init__(self, created_user, article_id, feedback_id, feedback_content, revision_content, duration_time):
+        self.created_user = created_user
+        self.article_id = article_id
+        self.feedback_id = feedback_id
+        self.feedback_content = feedback_content
+        self.revision_content = revision_content
+        self.duration_time = duration_time
+        self.created_time = datetime.utcnow()
+
+    def __repr__(self):
+        return '<Revision %r>' % self.id
 
 

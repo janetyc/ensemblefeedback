@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content2 %}
+
     <table align='center'>
         <tr>
             <td style='width: 75%;'>
@@ -13,14 +14,14 @@
                     <div style='text-align: right;'> Time left:
                       <span id='clock'>00 min 00 sec</span>
                     </div>
-                    <h2 id='title' align='center'>My First Heading</h2>
+                    <h2 id='title' align='center'></h2>
                     <div class="half mCustomScrollbar" data-mcs-theme="inset-2-dark">
-                        <p id='content'>My first paragraph.</p>
+                        <p id='content'></p>
                     </div>
                     <div class="ui form">
                         <div class="field">
-                            <h3><br>Editing Area for revision #<span id='version'>3</span>:</h3>
-                            <textarea rows="10" style="font-size: 120%;"></textarea>
+                            <h3><br>Editing Area for revision #<span id='version'>1</span>:</h3>
+                            <textarea id="revision_content" rows="10" style="font-size: 120%;"></textarea>
                             <grammarly-btn>
                                 <div data-reactroot="" class="_e725ae-textarea_btn _e725ae-anonymous _e725ae-not_focused">
                                     <div class="_e725ae-transform_wrap">
@@ -37,7 +38,13 @@
                     <div id='history' class='ui styled accordion'>
                     </div>
                     <div class="ui animated button" tabindex="0" onclick="nextstage()">
-                        <div id='btn_next' class="visible content">
+                        <!-- <div class="ui segment" id="loading-image">
+                            <div class="ui active loader">
+                                <div class="ui indeterminate large loader"></div>
+                            </div>
+                            <p></p>
+                        </div> -->
+                        <div id='btn_next' class="visible content" >
                           Next
                         </div>
                         <div class="hidden content">
@@ -49,11 +56,22 @@
             </td>
         </tr>
     </table>
+    <meta id="article_id" content="{{ data.article_id }}">
+    <meta id="feedback_id" content="{{ data.feedback_id }}">
+    <meta id="article_content" content="{{ data.article_content }}">
+    <meta id="feedback_content" content="{{ data.feedback_content }}">
 {% endblock %}
-
 
 {% block extra_js %}
 <script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript" src="/static/js/ensemble_script.js"></script>
 <script type="text/javascript" src="/static/js/ensemble_ui.js"></script>
+<script>
+    $(function() {
+        $(".rating").rating();
+        $(".accordion").accordion();
+
+
+    });
+</script>
 {% endblock %}
