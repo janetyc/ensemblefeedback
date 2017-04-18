@@ -172,7 +172,12 @@ function nextstage(){
   }
 
   //save revision content
-  $revisionArray.push($("#revision_content").val());
+  $("#revision_content").attr('action_time',$timer);// TODO: Save $time 
+  var revision_data = {
+    "revision_content": $("#revision_content").val(),
+    "revision_time": $("#revision_content").attr("action_time")
+  }
+  $revisionArray.push(revision_data);
 
   // if($str>2 || $str<0){
   //   finish();
