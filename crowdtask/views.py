@@ -1,6 +1,8 @@
 import re
+import json
 import random
 import string
+
 from flask import Blueprint, Flask, request, render_template, redirect, url_for, jsonify
 from crowdtask.dbquery import DBQuery
 
@@ -45,6 +47,28 @@ def show_all():
     return render_template('show_all.html', data=data_list)
 
 
+@views.route('/ensemble_all', methods=('GET','POST'))
+def show_ensemble_all():
+    all_ensemble_feedback = DBQuery().get_all_feedbacks()
+    data_list = []
+
+    for feedback in all_ensemble_feedback:
+        feedback_id = feedback.id
+        article_id = feedback.article_id
+        article = DBQuery().get_article_by_id(article_id)
+        article_authors = article.authors
+        title = article.title
+
+        data = {
+            "feedback_id": feedback_id,
+            "title": title,
+            "article_id": article_id,
+            "authors": article_authors
+        }
+        data_list.append(data)
+
+    return render_template('show_all_feedbacks.html', data=data_list)
+
 @views.route('/comparison', methods=('GET','POST'))
 def comparison_task():
     #generate verified_code
@@ -58,12 +82,9 @@ def comparison_task():
 
 @views.route('/article/<article_id>', methods=('GET','POST'))
 def show_article(article_id):
-
-
     article = DBQuery().get_article_by_id(article_id)
     paragraphs = article.content.split("<BR>")
     
-
     list = []
     for i, paragraph in enumerate(paragraphs):
         list.append((i, paragraph))
@@ -78,6 +99,35 @@ def show_article(article_id):
     }
 
     return render_template('article.html', data=data)
+
+
+###############################################
+#      Revision Task - ensemble feedback      #
+###############################################
+@views.route('/ensemble/<feedback_id>', methods=('GET','POST'))
+def ensemble_feedback(feedback_id):
+    verified_string = generate_verified_str(6)
+    feedback = DBQuery().get_feedback_by_id(feedback_id)
+    article_id = None
+    article_content = ""
+    feedback_content = ""
+    if feedback:        
+        article_id = feedback.article_id
+        content = feedback.content.strip()
+        feedback_content = feedback.feedback_content
+        content_list = content.split("\n")
+        article_content = "\n".join(content_list)
+
+    data = {
+        "article_id": article_id,
+        "feedback_id": feedback_id,
+        "article_content": article_content,
+        "feedback_content": json.dumps(feedback_content),
+
+        "verified_string": verified_string
+    }
+
+    return render_template('ensemble_feedback.html', data=data)
 
 
 @views.route('/success')

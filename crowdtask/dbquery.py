@@ -76,6 +76,10 @@ class DBQuery(object):
         return articles
 
     # feedback
+    def get_all_feedbacks(self):
+        all_feedbacks = Feedback.query.all()
+        return all_feedbacks
+
     def get_feedback_by_id(self, feedback_id):
         feedback = Feedback.query.filter_by(id=feedback_id).first()
         return feedback
