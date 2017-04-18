@@ -34,9 +34,11 @@ def create_app():
     app.jinja_env.globals['url_for_other_page'] = url_for_other_page
 
     #should put after app
+    from crowdtask.vis_views import vis_views
     from crowdtask.views import views
     from crowdtask.api import api
 
+    app.register_blueprint(vis_views)
     app.register_blueprint(views)
     app.register_blueprint(api)
 

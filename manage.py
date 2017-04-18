@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+import json
 
 from os import listdir
 from os.path import isfile, join
@@ -75,13 +76,53 @@ def import_articles(directory, filename):
         clear_content = "<BR>".join(list)
 
         article_id = DBQuery().add_article(article_title, clear_content, article_authors, article_source, int(article_year))
-
-
-        print "move article to data-in-db folder ..."
+        print "move article #%d to data-in-db folder ..." % article_id
         if isfile(join('data-in-db',file)):
             print "file has already existed in data-in-db folder..."
         else:
             shutil.move('%s/%s' % (directory, file), 'data-in-db')
+
+@manager.option('-d', '--dir', dest='directory', default='feedback-data')
+@manager.option('-n', '--filename', dest='filename', default=None)
+def import_feedback(directory, filename):
+    '''Insert Feedback to database.'''
+    print "import feedback from %s" % directory
+
+    all_files = [file for file in listdir(directory) if file.endswith('.json')]
+    print all_files
+    for file in all_files:
+        fname = file.split(".")[0]
+        txt_file = "%s.txt" % fname
+
+        article_authors, article_title = fname.split("-")
+        print [article_title.decode('utf-8'), article_authors.decode('utf-8')]
+        article = DBQuery().get_article_by_title_and_authors(article_title, article_authors.decode('utf-8'))
+        print article
+        if not article:
+            continue
+
+
+        article_id = article.id
+        print "Artcile id: %d" % article_id
+        print "Read Feedback: %s/%s ..." % (directory, file)
+        print "Read Article: %s/%s ..." % (directory, txt_file)
+        fp_json = open("%s/%s" % (directory, file), "r")
+        print fp_json
+        fp_txt = open("%s/%s" % (directory, txt_file), "r")
+        feedback_content = json.load(fp_json)
+        content = fp_txt.read().decode('utf-8')
+    
+        print feedback_content
+        print content
+        print "insert feedback to the database ..."
+        feedback_id = DBQuery().add_feedback(article_id, content, feedback_content)
+
+        print "move feedback to feedback-in-db folder ..."
+        if isfile(join('feedback-in-db',file)):
+            print "file has already existed in data-in-db folder..."
+        else:
+            shutil.move('%s/%s' % (directory, file), 'feedback-in-db')
+            shutil.move('%s/%s' % (directory, txt_file), 'feedback-in-db')
 
 if __name__ == '__main__':
     manager.run()

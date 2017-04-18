@@ -14,11 +14,13 @@
 
         <link rel="stylesheet" href="/static/css/normalize.min.css">
         <link rel="stylesheet" href="/static/css/semantic.min.css">
-        
-        <link rel="stylesheet" href="/static/css/main.css">
         <link rel="stylesheet" href="/static/css/range.css">
 
         <script src="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        {% endblock %}
+
+        {% block customize_css %}
+        <link rel="stylesheet" href="/static/css/main.css">
         {% endblock %}
     </head>
     <body>
@@ -33,6 +35,11 @@
         </div>
         {% endblock %}
         
+
+        {% block content2 %}
+
+                
+        {% endblock %}
         <div class="main-container">
             <div class="main wrapper clearfix">
             {% block content %}
