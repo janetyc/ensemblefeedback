@@ -51,15 +51,26 @@ def add_revision():
         feedback_content = json.loads(request.form['feedback_content'])
         revision_content = json.loads(request.form['revision_content'])
         duration_time = int(request.form['duration_time'])
-        
-        revision_id = DBQuery().add_revision(created_user, article_id, feedback_id, feedback_content, revision_content, duration_time)
+        verified_string = request.form['verified_string']
+        feedback_order = request.form['feedback_order']
 
+        revision_id = DBQuery().add_revision(created_user, article_id, feedback_id, feedback_order, feedback_content, revision_content, duration_time)
+        
+        problem = "%d,%d" % (article_id, feedback_id)
+        answer = "%d" % revision_id
+
+        #add task
+        DBQuery().add_task(created_user=created_user, task_type=TaskType.REVISION, problem=problem, 
+                        answer=answer, verified_string=verified_string)
         data = {
             "created_user": created_user,
             "article_id": article_id,
             "feedback_id": feedback_id,
             "feedback_content": feedback_content,
-            "duration_time": duration_time
+            "duration_time": duration_time,
+
+            "verified_string": verified_string,
+            "feedback_order": feedback_order
         }
 
         return jsonify(success=1, data=data)

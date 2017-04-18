@@ -97,15 +97,18 @@ class Revision(db.Model):
     created_user = db.Column(db.Text())
     article_id = db.Column(db.Integer)
     feedback_id = db.Column(db.Integer)
+    feedback_order = db.Column(db.Text())
     feedback_content = db.Column(JSON)
     revision_content = db.Column(JSON)
     duration_time = db.Column(db.Integer)
     created_time = db.Column(db.DateTime())
 
-    def __init__(self, created_user, article_id, feedback_id, feedback_content, revision_content, duration_time):
+
+    def __init__(self, created_user, article_id, feedback_id, feedback_order, feedback_content, revision_content, duration_time):
         self.created_user = created_user
         self.article_id = article_id
         self.feedback_id = feedback_id
+        self.feedback_order = feedback_order
         self.feedback_content = feedback_content
         self.revision_content = revision_content
         self.duration_time = duration_time

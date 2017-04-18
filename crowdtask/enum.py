@@ -5,5 +5,5 @@ def enum(*sequential, **named):
     return type('Enum', (), enums)
 
 TaskType = enum(
-    COMPARISON="comparison"
+    COMPARISON="comparison", REVISION="revision"
 )

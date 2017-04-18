@@ -22,8 +22,8 @@ class DBQuery(object):
 
         return feedback.id
 
-    def add_revision(self, created_user, article_id, feedback_id, feedback_content, revision_content, duration_time):
-        revision = Revision(created_user, article_id, feedback_id, feedback_content, revision_content, duration_time)
+    def add_revision(self, created_user, article_id, feedback_id, feedback_order, feedback_content, revision_content, duration_time):
+        revision = Revision(created_user, article_id, feedback_id, feedback_order, feedback_content, revision_content, duration_time)
         db.session.add(revision)
         db.session.commit()
 

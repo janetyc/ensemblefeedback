@@ -39,24 +39,28 @@ function disable(e){
   }
   e.parentNode.previousSibling.setAttribute('style',"background-color: LightGray;");
   e.parentNode.previousSibling.setAttribute('result',e.innerHTML);
-  // TODO: Send $time and the corresponding comment to server.
+  e.parentNode.previousSibling.setAttribute('action_time',$timer);// TODO: Save $time 
+  
 }
 
 function finish(){
   console.log("Finish");
   //return 0;
-  // TODO: Send $time and the Edit Area to server.
+
   var results = new Array();
   $(".feedback").each(function(i, val){
     var item_result = $(this).find(".title").attr("result");
     var rating = $(this).find(".title .rating .active").length;
+    var action_time = $(this).find(".title").attr("action_time");
     var action = (typeof item_result === "undefined" ? "None" : item_result);
+
     var item = {
       "id": i,
       "type_name": $title[ parseInt($(this).attr("type_id")) ],
       "type_id": $(this).attr("type_id"),
       "rating": rating,
-      "action": action
+      "action": action,
+      "action_time": action_time
     }
     results.push(item);
   });
@@ -70,13 +74,16 @@ function finish(){
           "feedback_id": $("#feedback_id").attr("content"),
           "feedback_content": JSON.stringify(results),
           "revision_content": JSON.stringify($revisionArray),
-          "duration_time": $timer
+          "duration_time": $timer,
+
+          "verified_string": $("#verified_string").attr("content"),
+          "feedback_order": $order
       },
       dataType: 'json', 
       
       success: function(data) {
           if(data['success'] == 1){
-            alert("Success");
+            window.location = "/success?verified_string="+$("#verified_string").attr("content");
           }
       },
       beforeSend: function(){
@@ -210,6 +217,7 @@ function everysecond(){
   else
     $timer--;
   */
+  document.getElementById('clock').innerHTML = Math.floor($timer/60)+' min '+$timer%60+' sec';
   $timer++;
 }
 

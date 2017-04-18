@@ -11,7 +11,7 @@
         <tr>
             <td style='width: 75%;'>
                 <div id='origin' class='blackborder'>
-                    <div style='text-align: right;'> Time left:
+                    <div style='text-align: right;'> Time spent: 
                       <span id='clock'>00 min 00 sec</span>
                     </div>
                     <h2 id='title' align='center'></h2>
@@ -56,6 +56,7 @@
             </td>
         </tr>
     </table>
+    <meta id="verified_string" content="{{ data.verified_string }}">
     <meta id="article_id" content="{{ data.article_id }}">
     <meta id="feedback_id" content="{{ data.feedback_id }}">
     <meta id="article_content" content="{{ data.article_content }}">
@@ -70,8 +71,6 @@
     $(function() {
         $(".rating").rating();
         $(".accordion").accordion();
-
-
     });
 </script>
 {% endblock %}
