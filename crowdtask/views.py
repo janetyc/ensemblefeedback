@@ -15,11 +15,11 @@ def index():
     return render_template('index.html')
 
 
-@views.route('/get_feedback_index', methods=['GET', 'POST'])
-@views.route('/get_feedback_index/<int:page>', methods=['GET', 'POST'])
-def get_feedback_index(page=1):
+@views.route('/all_articles', methods=['GET', 'POST'])
+@views.route('/all_articles/<int:page>', methods=['GET', 'POST'])
+def show_all_articles(page=1):
     paginated_articles = DBQuery().get_article_paginate(page, per_page)
-    return render_template('get_feedback_index.html', paginated_articles=paginated_articles)
+    return render_template('show_all_articles.html', paginated_articles=paginated_articles)
 
 @views.route('/all')
 def show_all():
