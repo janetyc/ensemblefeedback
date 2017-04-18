@@ -1,7 +1,229 @@
 {% extends "clean_base.html" %}
 {% block content %}
-<header>Comparison Task</header>
+{% if method == 'diff' %}
 <section>
-
+	<div class="showdiff-button">
+		<h3 style="float: left;">Comparison Task: Please read and choose the better written essay.<br/> The "Show Diff!" button can show you the difference between two essays.</h3>
+		<a class="ui button primary diffbtn">Show Diff!</a>
+	</div>
 </section>
+{% elif method == 'tag' %}
+<h3>Comparison Task: Please carefully read the essays, click on three keywords in each essay, <br/>and choose the better written one when the "Better!" buttons appear.</h3>
+{% else %}
+<h3 style="margin: 25px;">Comparison Task: Please read and choose the better written essay.</h3>
+{% endif %}
+<section>
+	<div class="comparison1">
+		<div class="comparison-text">
+			<p class="comparison-title">{{data.text1.title}}</p>
+			{% if method == 'tag' %}
+				{% for paragraph in data.text1.paragraphs %}
+					<p class="text_split1">{{ paragraph[1] }}<p>
+				{% endfor %}
+			{% elif method == 'diff' %}
+				{% for paragraph in data.text1.paragraphs %}
+					<p class="line_split1">{{ paragraph[1] }}<p>
+				{% endfor %}
+			{% else %}
+				{% for paragraph in data.text1.paragraphs %}
+					<p>{{ paragraph[1] }}<p>
+				{% endfor %}
+			{% endif %}
+		</div>
+		{% if method == 'tag': %}
+			<div class="comparison-button" style="visibility: hidden;">
+		{% else %}
+			<div class="comparison-button" style="visibility: visible;">
+		{% endif %}
+				<!-- <a class="ui button primary btn1" href="/verified">Better!</a> -->
+				<a class="ui button primary btn1">Better!</a>
+		</div>
+	</div>
+	<div class="comparison2">
+		<div class="comparison-text">
+			<p class="comparison-title">{{data.text2.title}}</p>
+			{% if method == 'tag' %}
+				{% for paragraph in data.text2.paragraphs %}
+					<p class="text_split2">{{ paragraph[1] }}<p>
+				{% endfor %}
+			{% elif method == 'diff' %}
+				{% for paragraph in data.text2.paragraphs %}
+					<p class="line_split2">{{ paragraph[1] }}<p>
+				{% endfor %}
+			{% else %}
+				{% for paragraph in data.text2.paragraphs %}
+					<p>{{ paragraph[1] }}<p>
+				{% endfor %}
+			{% endif %}
+		</div>
+		{% if method == 'tag': %}
+			<div class="comparison-button" style="visibility: hidden;">
+		{% else %}
+			<div class="comparison-button" style="visibility: visible;">
+		{% endif %}
+			<!-- <a class="ui button primary btn2" href="/verified">Better!</a> -->
+			<a class="ui button primary btn2">Better!</a>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+	$(document).ready(function() {
+		{% if method == 'tag' %}
+			// Constant
+			var paraTag1 = 0;
+			var paraTag2 = 0;
+
+			// Split text
+			$(".text_split1").lettering('words', 1);
+			$(".text_split2").lettering('words', 2);
+
+			// Button hide and show
+			function buttonShow(para1, para2) {
+				if (para1 >= 3 && para2 >= 3) {
+					$(".comparison-button").css("visibility", "visible");
+				} else {
+					$(".comparison-button").css("visibility", "hidden");
+				}
+			};
+
+			// tag selection
+			$('span[class^="word"]')
+				.hover(function(event){
+					$(this).css("background-color", "#b3daff");
+					$(this).css("border-radius", "5px");
+				},	function(event){
+					if($(this).attr('clicked') != 'yes') {
+						$(this).css("background-color", "transparent");
+					}
+				});
+			$('span[class^="word"]')
+				.click(function(event){
+					if($(this).attr('clicked') != 'yes') {
+						$(this).css("background-color", "#b3daff");
+						$(this).css("border-radius", "5px");
+						$(this).attr('clicked', 'yes');
+						if($(this).attr('class').match("^wordOne")) {
+							paraTag1++;
+						} else {
+							paraTag2++;
+						}
+					}
+					else {
+						$(this).css("background-color", "transparent");
+						$(this).attr('clicked', 'no');
+						if($(this).attr('class').match("^wordOne")) {
+							paraTag1--;
+						} else {
+							paraTag2--;
+						}
+					}
+					buttonShow(paraTag1, paraTag2);
+				});
+		{% elif method == 'diff' %}
+			function diffClass(addOrRemove) {
+				if (addOrRemove) {
+					{% for diff in diff1 %}
+						{% if diff == 1 %}
+							$(".lineOne" + {{loop.index}}).addClass("diff_highlight");
+						{% endif %}
+					{% endfor %}
+					{% for diff in diff2 %}
+						{% if diff == 1 %}
+							$(".lineTwo" + {{loop.index}}).addClass("diff_highlight");
+						{% endif %}
+					{% endfor %}
+				} else {
+					{% for diff in diff1 %}
+						{% if diff == 1 %}
+							$(".lineOne" + {{loop.index}}).removeClass("diff_highlight");
+						{% endif %}
+					{% endfor %}
+					{% for diff in diff2 %}
+						{% if diff == 1 %}
+							$(".lineTwo" + {{loop.index}}).removeClass("diff_highlight");
+						{% endif %}
+					{% endfor %}
+				}
+			}
+			$(".line_split1").lettering('lines', 1);
+			$(".line_split2").lettering('lines', 2);
+			$(".diffbtn").click(function(event){
+				if($(this).attr('clicked') != 'yes') {
+					$(this).attr('clicked', 'yes');
+					diffClass(true);
+				} else {
+					$(this).attr('clicked', 'no');
+					diffClass(false);
+				}
+			});
+		{% endif %}
+
+		// handle better button
+		var btncount = {{times}};
+
+		$(".btn1").click(function(event){
+			btncount++;
+
+			// Update to db
+			$.ajax({
+				type: "POST",
+				url: "/api/add_comparison",
+				data: {
+                    "pair_id": "{{pair_id}}",
+            		"created_user": "{{code}}",
+            		"choosed_article": 1,
+                },
+                dataType: 'json',               
+                success: function(data) {
+                	if (btncount >= 5)
+					{
+						window.location.href = "/verified/{{code}}";
+					} else {
+						var link = "/comparison";
+						{% if method is not none %}
+							link += "?mode={{method}}";
+						{% endif %}
+						window.location.href = link + "&ref=" + String(btncount);
+					}
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Error");    
+                }
+			});
+		});
+		$(".btn2").click(function(event){
+			btncount++;
+
+			// update to db
+			$.ajax({
+				type: "POST",
+				url: "/api/add_comparison",
+				data: {
+                    "pair_id": "{{pair_id}}",
+            		"created_user": "{{code}}",
+            		"choosed_article": 2,
+                },
+                dataType: 'json',               
+                success: function(data) {
+                	if (btncount >= 5)
+					{
+						window.location.href = "/verified/{{code}}";
+					} else {
+						var link = "/comparison";
+						{% if method is not none %}
+							link += "?mode={{method}}";
+						{% endif %}
+						window.location.href = link + "&ref=" + String(btncount);
+					}
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Error");    
+                }
+			});
+		});
+	});
+</script>
 {% endblock %}

@@ -28,6 +28,17 @@ def dropdb():
     if prompt_bool('Are you sure to drop your databse?'):
         db.drop_all()
 
+
+@manager.command
+def init_comparison():
+    # initialize comparison db
+    article_count = DBQuery().get_article_count()
+    for i in range(1, article_count + 1):
+        for j in range(i + 1, article_count + 1):
+            pair_id = str(i) + "_" + str(j)
+            DBQuery().add_comparison(pair_id, "", 0, 0, 0)
+
+
 @manager.option('-d', '--dir', dest='directory', default='data')
 @manager.option('-n', '--filename', dest='filename', default=None)
 def import_articles(directory, filename):

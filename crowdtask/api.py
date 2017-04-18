@@ -6,10 +6,23 @@ from datetime import datetime
 api = Blueprint('api', __name__, template_folder='templates')
 
 @api.route('/api/add_comparison', methods=('GET','POST'))
-def add_topic():
-    article_id = request.args.get('article_id')
-    worker_id = request.args.get('worker_id', u'tester')
-    verified_string = request.args.get('verified_string')
+def add_comparison():
+    if request.method == 'POST':
+        pair_id = request.form['pair_id']  # articleId1_articleId2
+        created_user = request.form['created_user']  # verified code
+        choosed_article = request.form['choosed_article']  # 1 or 2
+
+        comparison_id = DBQuery().update_comparison(pair_id, created_user, choosed_article)
+
+        data = {
+            "pair_id": pair_id,
+            "created_user": created_user,
+            "choosed_article": choosed_article,
+            "comparison_id": comparison_id
+        }
+        return jsonify(success=1, data=data)
+    else:
+        return jsonify(success=0, data=[])
 
 
 @api.route('/api/add_article', methods=('GET','POST'))
@@ -38,3 +51,4 @@ def add_article():
         return jsonify(success=1, data=data)
     else:
         return jsonify(success=0, data=[])
+

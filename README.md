@@ -64,3 +64,4 @@
 > heroku run python manage.py db stamp <revision> #Sets the revision in the database to the one given as an argument, without performing any migrations.
 > heroku run python manage.py db upgrade
 
+m

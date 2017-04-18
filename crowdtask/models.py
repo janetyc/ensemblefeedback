@@ -1,6 +1,7 @@
 from datetime import datetime
 from crowdtask import db
 
+
 class Article(db.Model):
     __tablename__ = 'article'
 
@@ -30,8 +31,8 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     created_user = db.Column(db.Text())
     task_type = db.Column(db.Text())
-    problem = db.Column(db.Text()) #article_id|paragraph_idx
-    answer = db.Column(db.Text()) #list of output_ids (e.g. relation_id, topic_id, relevance_id)
+    problem = db.Column(db.Text())  # article_id|paragraph_idx
+    answer = db.Column(db.Text())  # list of output_ids (e.g. relation_id, topic_id, relevance_id)
     verified_string = db.Column(db.Text())
     created_time = db.Column(db.DateTime())
     submited_time = db.Column(db.DateTime())
@@ -39,7 +40,6 @@ class Task(db.Model):
     hitId = db.Column(db.Text())
     assignmentId = db.Column(db.Text())
 
-    
     def __init__(self, created_user, task_type, problem, answer, verified_string):
         self.created_user = created_user
         self.task_type = task_type
@@ -52,21 +52,27 @@ class Task(db.Model):
     def __repr__(self):
         return '<Task %r>' % self.created_user
 
+
 class Comparison(db.Model):
     __tablename__ = 'comparison'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    pair_id = db.Column(db.Text())
     created_user = db.Column(db.Text())
-    article_id_pair = db.Column(db.Text())
+    article1_chosen = db.Column(db.Integer())
+    article2_chosen = db.Column(db.Integer())
     better_one = db.Column(db.Integer())
-    
+
     created_time = db.Column(db.DateTime())
 
-    def __init__(self, created_user, article_id_pair):
+    def __init__(self, pair_id, created_user,
+                 article1_chosen, article2_chosen, better_one):
+        self.pair_id = pair_id
         self.created_user = created_user
-        self.article_id_pair = article_id_pair
+        self.article1_chosen = article1_chosen
+        self.article2_chosen = article2_chosen
+        self.better_one = better_one
         self.created_time = datetime.utcnow()
 
     def __repr__(self):
         return '<Topic %r>' % self.created_user
-
