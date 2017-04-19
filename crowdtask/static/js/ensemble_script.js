@@ -65,6 +65,15 @@ function finish(){
     results.push(item);
   });
 
+  //save the last revision content
+  $("#revision_content").attr('action_time',$timer);// TODO: Save $time 
+  var revision_data = {
+    "revision_content": $("#revision_content").val(),
+    "revision_time": $("#revision_content").attr("action_time")
+  }
+  $revisionArray.push(revision_data);
+
+
   $.ajax({
       type: "POST",
       url: "/api/add_revision",
