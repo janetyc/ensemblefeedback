@@ -127,8 +127,16 @@ class DBQuery(object):
         comparison = Comparison.query.filter_by(pair_id=pair_id).first()
         if comparison.article1_chosen >= 2:
             comparison.better_one = int(article1)
+            # add task
+            self.add_task(created_user=comparison.created_user,
+                          task_type=TaskType.COMPARISON, problem=comparison.pair_id,
+                          answer=comparison.id, verified_string="")
         elif comparison.article2_chosen >= 2:
             comparison.better_one = int(article2)
+            # add task
+            self.add_task(created_user=comparison.created_user,
+                          task_type=TaskType.COMPARISON, problem=comparison.pair_id,
+                          answer=comparison.id, verified_string="")
         db.session.commit()
         return comparison.id
 
