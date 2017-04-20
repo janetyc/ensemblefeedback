@@ -74,18 +74,19 @@ def get_compair_pair():
 
     method = request.args.get('mode', default="diff")
     times = request.args.get('ref', default="0")
-    uncompare = DBQuery().get_uncompare_list()
-    if not uncompare:
-        if int(times) > 0:
-            return show_verify(verified_string)
+    pair_id = request.args.get('pair', default="")
+    if pair_id == "":
+        uncompare = DBQuery().get_uncompare_list()
+        if not uncompare:
+            if int(times) > 0:
+                return show_verify(verified_string)
+            else:
+                return render_template('task_finish.html')
         else:
-            return render_template('task_finish.html')
-    else:
-        pair_id = DBQuery().get_compare_by_id(random.choice(uncompare)).pair_id
-        return comparison_task(pair_id, method, verified_string, times)
+            pair_id = DBQuery().get_compare_by_id(random.choice(uncompare)).pair_id
+    return comparison_task(pair_id, method, verified_string, times)
 
 
-@views.route('/comparison/<pair_id>', methods=('GET','POST'))
 def comparison_task(pair_id, method, code, times):
     [p1, p2] = pair_id.split("_")
 
