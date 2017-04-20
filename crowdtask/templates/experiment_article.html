@@ -1,0 +1,24 @@
+{% extends "clean_base.html" %}
+{% block content %}
+<header>
+    <h2 style="text-align: center; margin: 10px;">{{data.title}}</h2>
+</header>
+<section>
+	<div class="comparison-text experiment-text">
+	    {% for paragraph in data.paragraphs %}
+	        <p>{{ paragraph[1] }}</p>
+	    {% endfor %}
+    </div>
+    <div class="next-page" style="text-align:center; margin: 10px;">
+		<a class="ui button center primary" href="/ensemble/{{data.feedback_id}}?order={{data.order}}&user={{data.create_user}}">Next Page</a>
+	</div>
+</section>
+
+{% endblock %}
+<script>
+    $(function() {
+    	var user = "";
+    	// Remove href of Ensemble title
+    	$('.ensemble-title').removeAttr('href');
+</script>
+{% endblock %}

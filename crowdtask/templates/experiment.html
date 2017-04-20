@@ -1,0 +1,124 @@
+{% extends "clean_base.html" %}
+{% block content %}
+<div class="experiment-description">
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	Here's for description!Here's for description!Here's for description!Here's for description!
+	<div class="next-page" style="text-align:center; margin: 10px;">
+		<a class="ui button center primary" href="/experiment_article/{{data.feedback_id}}?order={{data.order}}&user={{data.create_user}}">Next Page</a>
+	</div>
+</div>
+<div id="popup-create" class="ui small modal">
+    <div class="header">
+        Create a Username
+    </div>
+    <div class="add-area">
+        <form class="ui form">
+            <div class="field">
+                <label>User ID</label>
+                <input type="text" name="user" placeholder="Username (between 6 to 20 characters)">
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui positive button create-user">
+        	Yep, I want to submit.
+        </div>
+  </div>
+</div>
+<div id="popup-confirm" class="ui small modal">
+    <div class="header">
+    	Confirm Your Username
+    </div>
+    <div class="add-area">
+    	<p>Is this You?</p>
+    	<h1 style="text-align: center">{{data.create_user}}</h1>
+    	<div class="ui error message" style="visibility: hidden;">
+    		<p>Oops! It seems we mistook you for someone else. Please contact us to get a new link!</p>
+    	</div>
+    </div>
+    <div class="actions">
+        <div class="ui negative button confirm-user">
+        	No, it's not me.
+        </div>
+        <div class="ui positive labeled icon button confirm-user">
+        	Yes, it's me.
+        	<i class="checkmark icon"></i>
+        </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+    $(function() {
+    	var user = "";
+    	// Remove href of Ensemble title
+    	$('.ensemble-title').removeAttr('href');
+
+    	function submitForm() {
+			user = $("input[name='user']").val();
+
+        	if (!$('.ui.form').form('is valid')) {
+        		return false;
+			}
+			window.location = "/experiment/{{data.feedback_id}}?order={{data.order}}&user=" + user;
+		}
+
+        if ("{{data.create_user}}" == "") {
+        	$('#popup-create').modal({
+        		closable: false
+     		}).modal('show').modal('refresh');
+        } else {
+        	$('#popup-confirm').modal({
+        		closable: false
+     		}).modal('show').modal('refresh');
+        }
+
+        $('.ui.form').submit(function() {
+        	submitForm();
+		});
+
+        $('.ui.positive.button.create-user').click(function() {
+        	submitForm();
+		});
+
+        $('.ui.negative.button.confirm-user').click(function() {
+        	$('.ui.error.message').css('visibility', 'visible');
+        	return false;
+        });
+
+        //form validation
+        $('.ui.form').form({
+            inline: true,
+            fields: {
+                user: {
+                    identifier: 'user',
+                    rules: [
+                        {
+                            type   : 'minLength[6]',
+                            prompt : 'Wrong length of username'
+                        },
+                        {
+                            type   : 'maxLength[20]',
+                            prompt : 'Wrong length of username'
+                        },
+                    ]
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
