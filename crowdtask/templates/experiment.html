@@ -73,8 +73,9 @@
 
         	if (!$('.ui.form').form('is valid')) {
         		return false;
+			} else {
+				window.location = "/experiment/{{data.feedback_id}}?order={{data.order}}&user=" + user;
 			}
-			window.location = "/experiment/{{data.feedback_id}}?order={{data.order}}&user=" + user;
 		}
 
         if ("{{data.create_user}}" == "") {
@@ -92,7 +93,8 @@
 		});
 
         $('.ui.positive.button.create-user').click(function() {
-        	submitForm();
+        	if (!submitForm());
+        	return false;
 		});
 
         $('.ui.negative.button.confirm-user').click(function() {
