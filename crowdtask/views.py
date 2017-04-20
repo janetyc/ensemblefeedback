@@ -68,6 +68,7 @@ def show_ensemble_all():
 
     return render_template('show_all_feedbacks.html', data=data_list)
 
+
 @views.route('/comparison', methods=('GET','POST'))
 def get_compair_pair():
     verified_string = generate_verified_str(6)
@@ -181,6 +182,56 @@ def ensemble_feedback(feedback_id):
     }
 
     return render_template('ensemble_feedback.html', data=data)
+
+
+# For experiment
+@views.route('/experiment/<feedback_id>', methods=('GET','POST'))
+def experiment(feedback_id):
+    create_user = request.args.get('user', default="")
+    order = request.args.get('order', default="")
+
+    data = {
+        "feedback_id": feedback_id,
+        "order": order,
+        "create_user": create_user,
+    }
+
+    return render_template('experiment.html', data=data)
+
+
+# For experiment
+@views.route('/experiment_article/<feedback_id>', methods=('GET','POST'))
+def experiment_article(feedback_id):
+    verified_string = generate_verified_str(6)
+
+    create_user = request.args.get('user', default="")
+    order = request.args.get('order', default="")
+
+    feedback = DBQuery().get_feedback_by_id(feedback_id)
+    article_id = feedback.article_id
+    article = DBQuery().get_article_by_id(article_id)
+    paragraphs = article.content.split("<BR>")
+
+    list = []
+    for i, paragraph in enumerate(paragraphs):
+        list.append((i, paragraph))
+
+    sorted(list)
+
+    data = {
+        "article_id": article_id,
+        "title": article.title,
+        "authors": article.authors,
+        "paragraphs": list,
+
+        "feedback_id": feedback_id,
+        "order": order,
+        "create_user": create_user,
+
+        "verified_string": verified_string
+    }
+
+    return render_template('experiment_article.html', data=data)
 
 
 @views.route('/success')
