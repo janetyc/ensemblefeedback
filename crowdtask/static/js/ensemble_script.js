@@ -30,11 +30,14 @@ loadJSON(json_content);
 
 
 function disable(e){
+  console.log(e);
   e.setAttribute("class",'ui disabled button');
   if(e.innerHTML==='Reject') {
+    console.log("reject");
     e.previousSibling.setAttribute("class",'ui disabled button');
   }
   else if(e.innerHTML==='Accept') {
+    console.log("accept");
     e.nextSibling.setAttribute("class",'ui disabled button');
   }
   e.parentNode.previousSibling.setAttribute('style',"background-color: LightGray;");
@@ -64,6 +67,15 @@ function finish(){
     }
     results.push(item);
   });
+
+  //save the last revision content
+  $("#revision_content").attr('action_time',$timer);// TODO: Save $time 
+  var revision_data = {
+    "revision_content": $("#revision_content").val(),
+    "revision_time": $("#revision_content").attr("action_time")
+  }
+  $revisionArray.push(revision_data);
+
 
   $.ajax({
       type: "POST",
@@ -103,14 +115,16 @@ function nextstage(){
   
   if($order == "HML"){
     
-    mod_list = document.getElementsByClassName('mod_'+$str);
-    for(i=0;i<mod_list.length;i++){
-        if(mod_list[i].getAttribute('class').includes('title'))
-          mod_list[i].style.display = 'none';
-        else {
-          mod_list[i].setAttribute('style','background-color: White;');
-        }
-    }
+    // mod_list = document.getElementsByClassName('mod_'+$str);
+    // for(i=0;i<mod_list.length;i++){
+    //     // if(mod_list[i].getAttribute('class').includes('title'))
+    //     //   mod_list[i].style.display = 'none';
+    //     // else {
+    //     //   mod_list[i].setAttribute('style','background-color: White;');
+    //     // }
+    // }
+    $(".feedback[type_id="+$str+"]").css("display", "none");
+    $(".mod_"+$str).css("display", "none");
 
     mod_list = document.getElementsByClassName('mod_'+($str+1));
     for(i=0;i<mod_list.length;i++){
