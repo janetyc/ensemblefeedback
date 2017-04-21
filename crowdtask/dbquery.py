@@ -118,6 +118,11 @@ class DBQuery(object):
         revision = Revision.query.filter_by(id=revision_id).first()
         return revision
 
+    # revision
+    def get_revision_by_feedback_id_and_user(self, feedback_id, created_user):
+        revision = Revision.query.filter_by(feedback_id=feedback_id, created_user=created_user).first()
+        return revision
+
     # ************************************************** #
     #               Update data from database            #
     # ************************************************** #

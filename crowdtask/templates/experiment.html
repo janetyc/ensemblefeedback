@@ -18,7 +18,7 @@
 	Here's for description!Here's for description!Here's for description!Here's for description!
 	Here's for description!Here's for description!Here's for description!Here's for description!
 	<div class="next-page" style="text-align:center; margin: 10px;">
-		<a class="ui button center primary" href="/experiment_article/{{data.feedback_id}}?order={{data.order}}&user={{data.create_user}}">Next Page</a>
+		<a class="ui button center primary" href="/experiment_article/{{data.feedback_id}}?flow={{data.experiment_flow}}&order={{data.order}}&user={{data.create_user}}">Next Page</a>
 	</div>
 </div>
 <div id="popup-create" class="ui small modal">
@@ -74,7 +74,7 @@
         	if (!$('.ui.form').form('is valid')) {
         		return false;
 			} else {
-				window.location = "/experiment/{{data.feedback_id}}?order={{data.order}}&user=" + user;
+				window.location = "/experiment/{{data.feedback_id}}?flow={{data.experiment_flow}}&order={{data.order}}&user=" + user;
 			}
 		}
 

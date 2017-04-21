@@ -6,6 +6,8 @@ import compare
 from flask import Blueprint, Flask, request, render_template, redirect, url_for, jsonify
 from crowdtask.dbquery import DBQuery
 
+import sys
+
 per_page = 10
 views = Blueprint('views', __name__, template_folder='templates')
 
@@ -161,11 +163,13 @@ def show_article(article_id):
 @views.route('/ensemble/<feedback_id>', methods=('GET','POST'))
 def ensemble_feedback(feedback_id):
     verified_string = generate_verified_str(6)
+    experiment_flow = request.args.get('flow', default="")
+    create_user = request.args.get('user', default="")
     feedback = DBQuery().get_feedback_by_id(feedback_id)
     article_id = None
     article_content = ""
     feedback_content = ""
-    if feedback:        
+    if feedback:
         article_id = feedback.article_id
         content = feedback.content.strip()
         feedback_content = feedback.feedback_content
@@ -175,13 +179,57 @@ def ensemble_feedback(feedback_id):
     data = {
         "article_id": article_id,
         "feedback_id": feedback_id,
+        "create_user": create_user,
         "article_content": article_content,
         "feedback_content": json.dumps(feedback_content),
 
-        "verified_string": verified_string
+        "verified_string": verified_string,
+        "experiment_flow": experiment_flow,
     }
 
     return render_template('ensemble_feedback.html', data=data)
+
+
+# For experiment
+@views.route('/pre_experiment', methods=('GET','POST'))
+def pre_experiment():
+    # experiment flow pattern:
+    # <feedback_id1>-<order1>|<feedback_id2>-<order2>|<feedback_id3>-<order3>
+    experiment_flow = request.args.get('flow', default="")
+    create_user = request.args.get('user', default="")
+    feedback_ids = []
+    orders = []
+    done = []
+
+    flow = experiment_flow.split("|")
+    for element in flow:
+        [feedback_id, order] = element.split("-")
+        feedback_ids.append(feedback_id)
+        orders.append(order)
+        revison = DBQuery().get_revision_by_feedback_id_and_user(feedback_id, create_user)
+        if revison is None:
+            done.append(0)
+        else:
+            done.append(1)
+
+    data = {
+        "experiment_flow": experiment_flow,
+        "create_user": create_user,
+
+        "feedback_id1": feedback_ids[0],
+        "order1": orders[0],
+        "order1_done": done[0],
+
+        "feedback_id2": feedback_ids[1],
+        "order2": orders[1],
+        "order2_done": done[1],
+
+        "feedback_id3": feedback_ids[2],
+        "order3": orders[2],
+        "order3_done": done[2],
+    }
+
+    return render_template('pre_experiment.html', data=data)
 
 
 # For experiment
@@ -189,10 +237,12 @@ def ensemble_feedback(feedback_id):
 def experiment(feedback_id):
     create_user = request.args.get('user', default="")
     order = request.args.get('order', default="")
+    experiment_flow = request.args.get('flow', default="")
 
     data = {
         "feedback_id": feedback_id,
         "order": order,
+        "experiment_flow": experiment_flow,
         "create_user": create_user,
     }
 
@@ -206,7 +256,9 @@ def experiment_article(feedback_id):
 
     create_user = request.args.get('user', default="")
     order = request.args.get('order', default="")
+    experiment_flow = request.args.get('flow', default="")
 
+    sys.stderr.write("id: " + str(feedback_id))
     feedback = DBQuery().get_feedback_by_id(feedback_id)
     article_id = feedback.article_id
     article = DBQuery().get_article_by_id(article_id)
@@ -228,7 +280,8 @@ def experiment_article(feedback_id):
         "order": order,
         "create_user": create_user,
 
-        "verified_string": verified_string
+        "verified_string": verified_string,
+        "experiment_flow": experiment_flow,
     }
 
     return render_template('experiment_article.html', data=data)
@@ -237,11 +290,15 @@ def experiment_article(feedback_id):
 @views.route('/success')
 def success():
     verified_string = request.args.get('verified_string')
+    experiment_flow = request.args.get('flow', default="")
+    create_user = request.args.get('user', default="")
     if not verified_string:
         data = {}
     else:
         data = {
-            "verified_string": verified_string
+            "verified_string": verified_string,
+            "experiment_flow": experiment_flow,
+            "create_user": create_user,
         }
     return render_template('success.html', data=data)
 

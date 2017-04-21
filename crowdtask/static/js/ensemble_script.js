@@ -82,7 +82,7 @@ function finish(){
       url: "/api/add_revision",
       data: {
           "article_id": $("#article_id").attr("content"),
-          "created_user": "",
+          "created_user": $("#create_user").attr("content"),
           "feedback_id": $("#feedback_id").attr("content"),
           "feedback_content": JSON.stringify(results),
           "revision_content": JSON.stringify($revisionArray),
@@ -95,7 +95,7 @@ function finish(){
       
       success: function(data) {
           if(data['success'] == 1){
-            window.location = "/success?verified_string="+$("#verified_string").attr("content");
+            window.location = "/success?verified_string="+$("#verified_string").attr("content")+"&flow="+$('#experiment_flow').attr("content")+"&user="+$('#create_user').attr("content");
           }
       },
       beforeSend: function(){
