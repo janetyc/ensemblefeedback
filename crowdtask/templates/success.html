@@ -13,3 +13,10 @@
   {% endif %}
 </div>
 {% endblock %}
+{% block extra_js %}
+<script>
+    $(function() {
+    	$('.ensemble-title').removeAttr('href');
+    });
+</script>
+{% endblock %}
