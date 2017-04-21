@@ -106,7 +106,7 @@ class DBQuery(object):
 
     # feedback
     def get_all_feedbacks(self):
-        all_feedbacks = Feedback.query.all()
+        all_feedbacks = Feedback.query.order_by(Feedback.id).all()
         return all_feedbacks
 
     def get_feedback_by_id(self, feedback_id):

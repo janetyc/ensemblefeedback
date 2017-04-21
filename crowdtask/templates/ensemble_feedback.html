@@ -1,6 +1,7 @@
 {% extends "clean_base.html" %}
 
 {% block customize_css %}
+<!-- <link rel="stylesheet" href="/static/css/main.css"> -->
 <link rel="stylesheet" href="/static/css/ensemble_styles.css">
 <link rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.css" />
 {% endblock %}
@@ -9,7 +10,7 @@
 
     <table align='center'>
         <tr>
-            <td style='width: 75%;'>
+            <td style='width: 70%;'>
                 <div id='origin' class='blackborder'>
                     <div style='text-align: right;'> Time spent: 
                       <span id='clock'>00 min 00 sec</span>
@@ -35,7 +36,9 @@
             </td>
             <td>
                 <div>
-                    <div id='history' class='ui styled accordion'>
+                    <!-- <div id='history' class='ui styled accordion'> -->
+                    <div id='history' class='ui styled feedback-block'>
+                    
                     </div>
                     <div class="ui animated button" tabindex="0" onclick="nextstage()">
                         <!-- <div class="ui segment" id="loading-image">
@@ -72,9 +75,10 @@
 <script>
     $(function() {
         $(".rating").rating();
-        $(".accordion").accordion();
+        //$(".accordion").accordion();
         // Remove href of Ensemble title
         $('.ensemble-title').removeAttr('href');
+
     });
 </script>
 {% endblock %}

@@ -115,18 +115,17 @@ function nextstage(){
   
   if($order == "HML"){
     
-    // mod_list = document.getElementsByClassName('mod_'+$str);
-    // for(i=0;i<mod_list.length;i++){
-    //     // if(mod_list[i].getAttribute('class').includes('title'))
-    //     //   mod_list[i].style.display = 'none';
-    //     // else {
-    //     //   mod_list[i].setAttribute('style','background-color: White;');
-    //     // }
-    // }
-    $(".feedback[type_id="+$str+"]").css("display", "none");
-    $(".mod_"+$str).css("display", "none");
+    $(".feedback[type_id="+$str+"]").hide(); //hide feedback
 
-    mod_list = document.getElementsByClassName('mod_'+($str+1));
+    //clear up text
+    mod_list = $('span.mod_'+$str);
+    for(i=0;i<mod_list.length;i++){
+        mod_list[i].setAttribute('style','background-color: White;');
+    }
+
+    //show feedback at the next stage
+    $(".feedback[type_id="+($str+1)+"]").show();
+    mod_list = $('span.mod_'+($str+1));
     for(i=0;i<mod_list.length;i++){
         e = mod_list[i];
         if(!e.getAttribute('class')) continue
@@ -136,6 +135,22 @@ function nextstage(){
           e.setAttribute('style','background-color: #ebf5d6 ;');
         else if(e.getAttribute('class').includes('mod_2'))
           e.setAttribute('style','background-color: #ffcce6 ;');
+        // if(!e.getAttribute('class')) continue
+        // else if($str != -1){
+        //   if(e.getAttribute('class').includes('mod_0') && $str==0)
+        //     e.setAttribute('style','background-color: #ccf2ff ;');
+        //   else if(e.getAttribute('class').includes('mod_1') && $str==1)
+        //     e.setAttribute('style','background-color: #ebf5d6 ;');
+        //   else if(e.getAttribute('class').includes('mod_2') && $str==2)
+        //     e.setAttribute('style','background-color: #ffcce6 ;');
+        // }else{
+        //   if(e.getAttribute('class').includes('mod_0'))
+        //     e.setAttribute('style','background-color: #ccf2ff ;');
+        //   else if(e.getAttribute('class').includes('mod_1'))
+        //     e.setAttribute('style','background-color: #ebf5d6 ;');
+        //   else if(e.getAttribute('class').includes('mod_2'))
+        //     e.setAttribute('style','background-color: #ffcce6 ;');
+        // }
     }
     $str++;
     $version++;
@@ -149,16 +164,14 @@ function nextstage(){
     }
   }else if($order == "LMH"){
 
-    mod_list = document.getElementsByClassName('mod_'+$str);
+    $(".feedback[type_id="+$str+"]").hide();
+    mod_list = $('span.mod_'+$str);
     for(i=0;i<mod_list.length;i++){
-        if(mod_list[i].getAttribute('class').includes('title'))
-          mod_list[i].style.display = 'none';
-        else {
-          mod_list[i].setAttribute('style','background-color: White;');
-        }
+        mod_list[i].setAttribute('style','background-color: White;');
     }
-
-    mod_list = document.getElementsByClassName('mod_'+($str-1));
+    
+    $(".feedback[type_id="+($str-1)+"]").show();
+    mod_list = $('span.mod_'+($str-1));
     for(i=0;i<mod_list.length;i++){
         e = mod_list[i];
         if(!e.getAttribute('class')) continue
@@ -168,6 +181,22 @@ function nextstage(){
           e.setAttribute('style','background-color: #ebf5d6 ;');
         else if(e.getAttribute('class').includes('mod_2'))
           e.setAttribute('style','background-color: #ffcce6 ;');
+        // if(!e.getAttribute('class')) continue
+        // else if($str != -1){
+        //   if(e.getAttribute('class').includes('mod_0') && $str==0)
+        //     e.setAttribute('style','background-color: #ccf2ff ;');
+        //   else if(e.getAttribute('class').includes('mod_1') && $str==1)
+        //     e.setAttribute('style','background-color: #ebf5d6 ;');
+        //   else if(e.getAttribute('class').includes('mod_2') && $str==2)
+        //     e.setAttribute('style','background-color: #ffcce6 ;');
+        // }else{
+        //   if(e.getAttribute('class').includes('mod_0'))
+        //     e.setAttribute('style','background-color: #ccf2ff ;');
+        //   else if(e.getAttribute('class').includes('mod_1'))
+        //     e.setAttribute('style','background-color: #ebf5d6 ;');
+        //   else if(e.getAttribute('class').includes('mod_2'))
+        //     e.setAttribute('style','background-color: #ffcce6 ;');
+        // }
     }
     $str--;
     $version++;
@@ -319,26 +348,36 @@ function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
   comment = comment.replace(new RegExp('\n','g'), '<br>');
   new_e_2.appendChild(addElement('p','',e_title+' '+hist+'.<br>'+comment));
 
-  if(e_title==='Comment'){
-    btn = addElement('button','ui primary button','Solved');
-    btn.setAttribute("onclick", "disable(this)");
-    new_e_2.appendChild(btn);
-  }
-  else {
-    btn_1 = addElement('button','ui primary button','Accept');
-    btn_1.setAttribute("onclick", "disable(this)");
-    btn_2 = addElement('button','ui primary button','Reject');
-    btn_2.setAttribute("onclick", "disable(this)");
-    new_e_2.appendChild(btn_1);
-    new_e_2.appendChild(btn_2);
-  }
-  if(!visibility){
-    new_e.style.display = 'none';
-    new_e_2.style.display = 'none';
-  }
+  // if(e_title==='Comment'){
+  //   btn = addElement('button','ui primary button','Solved');
+  //   btn.setAttribute("onclick", "disable(this)");
+  //   new_e_2.appendChild(btn);
+  // }
+  // else {
+  //   btn_1 = addElement('button','ui primary button','Accept');
+  //   btn_1.setAttribute("onclick", "disable(this)");
+  //   btn_2 = addElement('button','ui primary button','Reject');
+  //   btn_2.setAttribute("onclick", "disable(this)");
+  //   new_e_2.appendChild(btn_1);
+  //   new_e_2.appendChild(btn_2);
+  // }
+  
+  btn_1 = addElement('button','ui primary button','Accept');
+  btn_1.setAttribute("onclick", "disable(this)");
+  btn_2 = addElement('button','ui primary button','Reject');
+  btn_2.setAttribute("onclick", "disable(this)");
+  new_e_2.appendChild(btn_1);
+  new_e_2.appendChild(btn_2);
+
+  // if(!visibility){
+  //   new_e.style.display = 'none';
+  //   new_e_2.style.display = 'none';
+  // }
   for(i=i_s;i<=i_e;i++){
-    var e = document.getElementById(i.toString())
-    e.setAttribute('class',e_type);
+    var e = document.getElementById(i.toString());
+    // e.setAttribute('class',e_type);
+    e.classList.add(e_type);
+    
     if(!visibility){
       e.setAttribute('style','background-color: white;');
     }
@@ -350,10 +389,15 @@ function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
   new_item.setAttribute("type_id",e_type[4])
   new_item.appendChild(new_e);
   new_item.appendChild(new_e_2);
-  
+
+  if(!visibility){
+    new_item.style.display = 'none';
+  }
   document.getElementById('history').appendChild(new_item);
   //document.getElementById('history').appendChild(new_e);
   //document.getElementById('history').appendChild(new_e_2);
+
+  
 }
 
 function loadText(text)
@@ -375,6 +419,8 @@ function loadJSON(jsonData){
           }else{
             addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],true);
           }
+          // addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],false);
+
         }
     }
     if($str == -1){
@@ -388,6 +434,17 @@ function loadJSON(jsonData){
   
   h = $('#origin').height()-60;
   document.getElementById('history').setAttribute('style','height: '+h+'px;');
+
+  if($str == -1){
+    $(".mod_0").attr('style','background-color: #ccf2ff ;');
+    $(".mod_1").attr('style','background-color: #ebf5d6 ;');
+    $(".mod_2").attr('style','background-color: #ffcce6 ;');
+  }else{
+    if($str == 0) $(".mod_0").attr('style','background-color: #ccf2ff ;');
+    else if($str == 1) $(".mod_1").attr('style','background-color: #ebf5d6 ;');
+    else if($str == 2) $(".mod_2").attr('style','background-color: #ffcce6 ;');
+  }
+
 }
 
 function readTextFile(file)
@@ -490,50 +547,81 @@ var $middle_x = Math.floor(document.getElementById('history').offsetLeft);
 $("#origin").on("mouseover", "span", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
-    
+  
   if($str != -1){
-    var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
+    var $this_list = document.getElementsByClassName('mod mod_'+$str);
   }else{
     var $this_list = document.getElementsByClassName('mod');
   }
+
   for(i=0;i<$this_list.length;i++){
+    
     var i_s = parseInt($this_list[i].getAttribute('i_start'));
     var i_e = parseInt($this_list[i].getAttribute('i_end'));
     if(i_s<= $id && i_e>= $id){
       $this_list[i].setAttribute('style',"background-color: White;");
-      for(i_x=i_s;i_x<=i_e;i_x++)
-        document.getElementById(i_x).setAttribute('style','background-color: LightGray;');
+      // $this_list[i].classList.toggle('active');
+      for(i_x=i_s;i_x<=i_e;i_x++){
+        // document.getElementById(i_x).setAttribute('style','background-color: LightGray;');
+        if(!document.getElementById(i_x).classList.contains('loc-hovered'))
+          document.getElementById(i_x).classList.add('loc-hovered');
+        
+      }
     }
   }
 });
 $("#origin").on("click", "span", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
+
+  
   if($str != -1){
-    var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
+    var $this_list = $('.mod_'+$str);
   }else{
-    var $this_list = document.getElementsByClassName('mod');
+    var $this_list = $('.mod');
   }
+  
   for(i=0;i<$this_list.length;i++){
     var i_s = parseInt($this_list[i].getAttribute('i_start'));
     var i_e = parseInt($this_list[i].getAttribute('i_end'));
+
     if(i_s<= $id && i_e>= $id){
+        var current = document.getElementById(i_s).classList.contains('loc-selected');
+        
+        if(!current){
+          $('.loc-selected').removeClass('loc-selected');
+          $this_list[i].classList.remove('active');
+        }
+        for(i_x=i_s;i_x<=i_e;i_x++){
+          if(current){
+            $this_list[i].classList.remove('active');
+            document.getElementById(i_x).classList.remove('loc-selected');
+          }
+          else{
+            $this_list[i].classList.add('active');
+            document.getElementById(i_x).classList.add('loc-selected');
+          }
+        }
+
         $offset = $('#'+i_s).offset();
         $history = $('#history');
+
         document.getElementById('history').scrollTop = ($this_list[i].offsetTop - $offset.top +20);
         drawArrow($offset.left, $offset.top,$this_list[i].offsetLeft+$history.offset().left,
           $this_list[i].offsetTop+$history.offset().top - $history.scrollTop());
-        // console.log($history.offset().top);
+        
         break;
     }
   }
+
 });
 $("#origin").on("mouseleave", "span", function () {
   $('canvas').remove();
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
   if($str != -1){
-    var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
+    // var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
+    var $this_list = document.getElementsByClassName('mod mod_'+$str);
   }else{
     var $this_list = document.getElementsByClassName('mod');
   }
@@ -543,8 +631,12 @@ $("#origin").on("mouseleave", "span", function () {
     var i_e = parseInt(e.getAttribute('i_end'));
     if(i_s<= $id && i_e>= $id){
       e.setAttribute('style',"background-color: none;");
+      $this_list[i].classList.toggle('active');
+
       for(i_x=i_s;i_x<=i_e;i_x++){
-        document.getElementById(i_x).setAttribute('style',"background-color: none;");
+        // document.getElementById(i_x).setAttribute('style',"background-color: none;");
+        if(document.getElementById(i_x).classList.contains('loc-hovered'))
+          document.getElementById(i_x).classList.remove('loc-hovered');
       }
     }
   }
@@ -552,6 +644,7 @@ $("#origin").on("mouseleave", "span", function () {
 
 // Hover on history
 $('#history').on("mouseover", ".mod", function () {
+  
   var $t = $(this);
   var i_s = parseInt($t.attr('i_start')), i_e = parseInt($t.attr('i_end'));
   var index = Math.floor((i_s+i_e)/2 );
@@ -563,16 +656,28 @@ $('#history').on("mouseover", ".mod", function () {
 $('#history').on("mouseleave", ".mod", function () {
   $('canvas').remove();
   var $t = $(this);
+  
+
   var i_s = parseInt($t.attr('i_start')), i_e = parseInt($t.attr('i_end'));
   for(i=i_s;i<=i_e;i++){
     e = document.getElementById(i)
     if(!e.getAttribute('class')) continue
-    else if(e.getAttribute('class').includes('mod_0'))
-      e.setAttribute('style','background-color: #ccf2ff ;');
-    else if(e.getAttribute('class').includes('mod_1'))
-      e.setAttribute('style','background-color: #ebf5d6 ;');
-    else if(e.getAttribute('class').includes('mod_2'))
-      e.setAttribute('style','background-color: #ffcce6 ;');
+    else if($str != -1){
+      if(e.getAttribute('class').includes('mod_0') && $str==0)
+        e.setAttribute('style','background-color: #ccf2ff ;');
+      else if(e.getAttribute('class').includes('mod_1') && $str==1)
+        e.setAttribute('style','background-color: #ebf5d6 ;');
+      else if(e.getAttribute('class').includes('mod_2') && $str==2)
+        e.setAttribute('style','background-color: #ffcce6 ;');
+    }else{
+      if(e.getAttribute('class').includes('mod_0'))
+        e.setAttribute('style','background-color: #ccf2ff ;');
+      else if(e.getAttribute('class').includes('mod_1'))
+        e.setAttribute('style','background-color: #ebf5d6 ;');
+      else if(e.getAttribute('class').includes('mod_2'))
+        e.setAttribute('style','background-color: #ffcce6 ;');
+    }
+
   }
 });
 

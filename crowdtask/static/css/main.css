@@ -492,7 +492,7 @@ nav ul{
 }
 
 .experiment-text{
-    margin-top: 20px
+    margin-top: 20px;
     width: 90%;
     padding: 3%;
 }
@@ -669,7 +669,7 @@ nav ul{
    ============ */
 
     .title {
-        float: left;
+        /*float: left;*/
     }
     
     nav a {
