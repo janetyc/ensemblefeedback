@@ -78,7 +78,7 @@
 			}
 		}
 
-        if ("{{data.create_user}}" == "") {
+        if ("{{data.create_user}}" == "" || "{{data.create_user}}" == "None") {
         	$('#popup-create').modal({
         		closable: false
      		}).modal('show').modal('refresh');

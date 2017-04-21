@@ -196,7 +196,7 @@ def pre_experiment():
     # experiment flow pattern:
     # <feedback_id1>-<order1>|<feedback_id2>-<order2>|<feedback_id3>-<order3>
     experiment_flow = request.args.get('flow', default="")
-    create_user = request.args.get('user', default="")
+    create_user = request.args.get('user', default=None)
     feedback_ids = []
     orders = []
     done = []
