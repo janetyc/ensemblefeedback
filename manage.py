@@ -91,7 +91,7 @@ def import_feedback(directory, filename):
     all_files = [file for file in listdir(directory) if file.endswith('.json')]
     print all_files
     for file in all_files:
-        fname = file.split(".")[0]
+        fname = file[:-5] # remove ".json"
         txt_file = "%s.txt" % fname
 
         article_authors, article_title = fname.split("-")
