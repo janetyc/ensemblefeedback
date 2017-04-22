@@ -1,13 +1,12 @@
 {% extends "clean_base.html" %}
 
 {% block customize_css %}
-<!-- <link rel="stylesheet" href="/static/css/main.css"> -->
+<link rel="stylesheet" href="/static/css/main.css">
 <link rel="stylesheet" href="/static/css/ensemble_styles.css">
 <link rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.css" />
 {% endblock %}
 
 {% block content2 %}
-
     <table align='center'>
         <tr>
             <td style='width: 70%;'>
@@ -36,25 +35,8 @@
             </td>
             <td>
                 <div>
-                    <!-- <div id='history' class='ui styled accordion'> -->
-                    <div id='history' class='ui styled feedback-block'>
-                    
-                    </div>
-                    <div class="ui animated button" tabindex="0" onclick="nextstage()">
-                        <!-- <div class="ui segment" id="loading-image">
-                            <div class="ui active loader">
-                                <div class="ui indeterminate large loader"></div>
-                            </div>
-                            <p></p>
-                        </div> -->
-                        <div id='btn_next' class="visible content" >
-                          Next
-                        </div>
-                        <div class="hidden content">
-                            <i class="right arrow icon"></i>
-                        </div>
-                    </div>
-                    <!-- <div class="ui huge star rating"></div> -->
+                    <div id='history' class='ui styled feedback-block shadow'></div>
+                    <div id="btn_next" class="ui button black" tabindex="0" onclick="nextstage()">Next</div>
                 </div>
             </td>
         </tr>

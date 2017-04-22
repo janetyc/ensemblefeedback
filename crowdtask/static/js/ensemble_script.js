@@ -160,7 +160,7 @@ function nextstage(){
     if($version>2){
       btn = document.getElementById('btn_next')
       btn.innerHTML='Finish';
-      btn.parentNode.setAttribute('onclick','finish()');
+      btn.setAttribute('onclick','finish()');
     }
   }else if($order == "LMH"){
 
@@ -205,13 +205,13 @@ function nextstage(){
     if($version>2){
       btn = document.getElementById('btn_next')
       btn.innerHTML='Finish';
-      btn.parentNode.setAttribute('onclick','finish()');
+      btn.setAttribute('onclick','finish()');
     }
 
   }else{
     btn = document.getElementById('btn_next')
     btn.innerHTML='Finish';
-    btn.parentNode.setAttribute('onclick','finish()');
+    btn.setAttribute('onclick','finish()');
   }
 
   //save revision content
@@ -323,12 +323,12 @@ function addElement(type, id, inner){
 }
 function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
   new_e = document.createElement("div");
-  new_e.setAttribute("class", 'mod '+e_type+' title');
+  new_e.setAttribute("class", 'mod '+e_type+' title '+e_type+"_styled");
   new_e.setAttribute("i_start", i_s);
   new_e.setAttribute("i_end", i_e);
   new_e.setAttribute("e_id", e_type[4]);
 
-  new_e.appendChild(addElement("i","dropdown icon",' '));
+  
   if(e_type==='mod_0')
     new_e.innerHTML += $title[0]+' #'+id;
   else if(e_type==='mod_1')
@@ -426,7 +426,7 @@ function loadJSON(jsonData){
     if($str == -1){
       btn = document.getElementById('btn_next')
       btn.innerHTML='Finish';
-      btn.parentNode.setAttribute('onclick','finish()');
+      btn.setAttribute('onclick','finish()');
     }
     else {
       document.getElementById('version').innerHTML = ++$version;
@@ -487,7 +487,7 @@ function readJson(file)
     if($str>=2 || $str<0){
       btn = document.getElementById('btn_next')
       btn.innerHTML='Finish';
-      btn.parentNode.setAttribute('onclick','finish()');
+      btn.setAttribute('onclick','finish()');
     }
     else {
       document.getElementById('version').innerHTML = ++$str;
