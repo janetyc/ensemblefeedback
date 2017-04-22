@@ -1,8 +1,14 @@
 {% extends "clean_base.html" %}
+{% block customize_css %}
+<link rel="stylesheet" href="/static/css/main.css">
+<!-- <link rel="stylesheet" href="/static/css/experiment-styles.css"> -->   
+{% endblock %}
+
 {% block content %}
 <div class="experiment-description">
-    <div></div>
-	<div class="center-block">{{ data.article_title }}</div>
+    <h3 class="description">請花 5 秒鐘思考一下寫作題目</h3>
+	<div class="writing-topic">{{ data.article_title }}</div>
+    <div id="countdown">5</div>
 	<div class="next-page" style="text-align:center; margin: 10px;">
 		<a id="go-to-next" class="ui button center primary" href="/experiment_article/{{data.feedback_id}}?flow={{data.experiment_flow}}&order={{data.order}}&user={{data.create_user}}">Next Page</a>
 	</div>
@@ -50,8 +56,17 @@
 {% block extra_js %}
 <script>
     $(function() {
+        var sec = 5;
+        var timer = setInterval(function(){
+            $('#countdown').text(sec--);
+            if (sec == -1) {
+                clearInterval(timer);
+                $('#go-to-next').show(0);
+                $('#countdown').text("");
+            } 
+        }, 1000);
         $('#go-to-next').hide();
-        $('#go-to-next').delay(5000).show(0);
+        //$('#go-to-next').delay(5000).show(0);
 
     	var user = "";
     	// Remove href of Ensemble title

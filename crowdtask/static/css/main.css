@@ -57,7 +57,7 @@ textarea {
    ========================================================================== */
 
 body {
-    font: 14px/26px Helvetica, Helvetica Neue, Arial;
+    font: 14px/26px Lato, Helvetica, Helvetica Neue, Arial;
 
 }
 
@@ -308,16 +308,28 @@ body {
 
 }
 
-.center-block {
-    font-size: 1.7em;
+.writing-topic {
+    width: auto;
+    font-size: 26px;
     font-weight: bold;
-    padding: 0.8em;
+    padding: 10px;
     border: 1px #555 solid;
     -moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px; -khtml-border-top-left-radius: 5px; border-top-left-radius: 5px;
     -moz-border-radius-topright: 5px; -webkit-border-top-right-radius: 5px; -khtml-border-top-right-radius: 5px; border-top-right-radius: 5px;
     -moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px; -khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;
     -moz-border-radius-bottomright: 5px; -webkit-border-bottom-right-radius: 5px; -khtml-border-bottom-right-radius: 5px; border-bottom-right-radius: 5px; 
 }
+#countdown{
+    margin-top: 30px;
+    color: #ED5757;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+.experiment-description{
+    margin-top: 40px;
+}
+
 /* ==============
     MOBILE: Menu
    ============== */
