@@ -62,8 +62,8 @@ body {
 }
 
 .wrapper {
-    width: 90%;
-    margin: 0 5%;
+    width: 100%;
+    /*margin: 0 5%;*/
 }
 
 
@@ -95,6 +95,7 @@ body {
 
 .title {
     color: white;
+    margin-left: 1%;
 }
 .title a{ color: white; text-decoration: none; }
 .highlight-sentence:hover{
@@ -634,6 +635,11 @@ nav ul{
 }
 .annotation-button{
     margin-top: 10px;
+}
+
+.button-areas{
+    text-align: center;
+    margin-top: 100px;
 }
 /* ==========================================================================
    Media Queries
