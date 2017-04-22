@@ -93,11 +93,15 @@ body {
     color: #999;
 }
 
-.title {
+.site-title {
     color: white;
     padding-left: 1%;
+
 }
-.title a{ color: white; text-decoration: none; }
+.site-title a{
+    color: white; text-decoration: none;
+    cursor: pointer;
+}
 .highlight-sentence:hover{
     background-color: #ffb3b3;
     cursor: pointer;
