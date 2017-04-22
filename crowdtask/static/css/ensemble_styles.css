@@ -67,7 +67,7 @@
     background-color: LightGray !important;
 }
 .loc-selected{
-    background-color: #333 !important; 
+    background-color: #DB0A79 !important; 
     color: #fff;
 }
 .feedback {
@@ -103,8 +103,10 @@
    box-shadow:         inset 0 0 5px #555;
 }
 .feedback-hovered {
-  border: 2px #ED5757 solid;
+  /*border: 2px #ED5757 solid;*/
+  border: 2px #555 solid;
 }
 .feedback-selected {
-  border: 3px #ED5757 solid;
+  /*border: 3px #ED5757 solid;*/
+  border: 3px #DB0A79 solid;
 }

@@ -531,7 +531,7 @@ function drawArrow(a_x,a_y,b_x,b_y){
   }).appendTo($('body table'))[0].getContext('2d');
 
   // draw line
-  c.strokeStyle = '#f00';
+  c.strokeStyle = '#DB0A79';
   c.lineWidth = 2;
   // canvas_arrow(c,b_x-10 - p.x,b_y-10 - p.y,b_x - p.x,b_y-10 - p.y);
   c.moveTo(a_x - p.x,    a_y - p.y);
