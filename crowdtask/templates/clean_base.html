@@ -29,13 +29,41 @@
         <![endif]-->
         {% block navbar %}
         <div class="header-container" id="navBar">
-            <header>
-                <h1 class="site-title"><a class="ensemble-title" href="/">Ensemble</a></h1>
-            </header>
+            <header><h1 class="site-title"><a class="ensemble-title" href="/">Ensemble</a></h1></header>
+            <div class="menu float-right">
+            <a class="writing-tip browse"><i class="info circle icon"></i>writing tip</a>
+            <div class="writing-tip-menu ui popup top left transition hidden menu">
+                <div class="w-tip-area">
+                <div class="tip1 w-tip-title">
+                    Essay Structure
+                </div>
+                <div class="tip2 w-tip-title">
+                    Feedback Type
+                </div>
+                <div class="tip3 w-tip-title">
+                    Coherence & Unity
+                </div>
+                </div>
+                <div class="writing-tip-content">
+                    <div id="w-tip1" class="w-tip">
+                        <img src="/static/images/tip1.png" alt="tip1">
+                    </div>
+                    <div id="w-tip2" class="w-tip">
+                        <img src="/static/images/tip2.png" alt="tip1">
+                    </div>
+                    <div id="w-tip3" class="w-tip">
+                        <img src="/static/images/tip3.png" alt="tip1">
+                    </div>
+                </div>
+            
+            </div>
+            </div>
         </div>
         {% endblock %}
+
         
 
+        
         {% block content2 %}
 
                 
@@ -76,7 +104,33 @@
 
         {% block extra_js %}
         {% endblock %}
-
+        <script type="text/javascript">
+            $(function(){
+                $('.menu .browse').popup({
+                    position   : 'bottom right',
+                    on: 'click'
+                });
+                $('.w-tip').hide();
+                $('#w-tip1').show();
+                $('.w-tip-title').click(function(){
+                    $('.w-tip').hide();
+                    $('.w-tip-title').removeClass('selected');
+                    if($(this).hasClass('tip1')){
+                        $('#w-tip1').show();
+                        $(this).addClass('selected');
+                    }
+                    if($(this).hasClass('tip2')){
+                        $('#w-tip2').show();
+                        $(this).addClass('selected');
+                    }
+                    if($(this).hasClass('tip3')){
+                        $('#w-tip3').show();
+                        $(this).addClass('selected');
+                        
+                    }
+                });
+            });
+        </script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
         {% block google_analytics %}
         <script>

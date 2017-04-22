@@ -73,6 +73,7 @@ body {
 
 .header-container {
     border-bottom: 2px solid #34495e;
+    overflow: hidden;
 }
 
 .footer-container,
@@ -644,6 +645,65 @@ nav ul{
 .button-areas{
     text-align: center;
     margin-top: 100px;
+}
+
+.float-right {
+    display: block;
+    float: right;
+    font-size: 20px;
+    color: #ffffff;
+    margin-right: 1%;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+header{  
+    float:left; 
+    margin-left: 1%;
+}
+.writing-tip{
+    cursor: pointer;
+    color: #ffffff
+}
+.w-tip-title{
+    /*border: 1px #ff0000 solid;*/
+    margin: 10px 0px;
+    float: left;
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px #ff0066 solid;
+    /*-moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px; -khtml-border-top-left-radius: 5px; border-top-left-radius: 5px;
+    -moz-border-radius-topright: 5px; -webkit-border-top-right-radius: 5px; -khtml-border-top-right-radius: 5px; border-top-right-radius: 5px;
+    -moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px; -khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px; -webkit-border-bottom-right-radius: 5px; -khtml-border-bottom-right-radius: 5px; border-bottom-right-radius: 5px;*/
+}
+.w-tip-title.selected,
+.w-tip-title:hover{
+    background-color: #ff0066;
+    color: #fff;
+    /*background-color: #555;
+    color: #fff;*/
+    /*border: 1px #f00 solid;*/
+    /*-moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px; -khtml-border-top-left-radius: 5px; border-top-left-radius: 5px;
+    -moz-border-radius-topright: 5px; -webkit-border-top-right-radius: 5px; -khtml-border-top-right-radius: 5px; border-top-right-radius: 5px;
+    -moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px; -khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px; -webkit-border-bottom-right-radius: 5px; -khtml-border-bottom-right-radius: 5px; border-bottom-right-radius: 5px;*/
+}
+
+.writing-tip-content{
+    display: block;
+    width: 650px;
+    /*border: 1px #ff00ff solid;*/
+
+}
+.w-tip img{
+    width: 600px;
+    /*border: 1px #ff0000 solid;*/
+
+}
+.writing-tip-menu{
+    overflow: hidden;
 }
 /* ==========================================================================
    Media Queries

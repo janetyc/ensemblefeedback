@@ -1,7 +1,7 @@
 {% extends "clean_base.html" %}
 {% block content %}
-<header>Show All Feedback</header>
 <section>
+	<div class="article-title">Show All Feedback</div>
     <ul>
     {% for feedback in data %}
     <li><a href="{{ url_for('views.ensemble_feedback', feedback_id=feedback.feedback_id)}}">Feedback {{feedback.feedback_id}}: {{feedback.title}} ({{feedback.authors}}, article {{feedback.article_id}})</a></li>
