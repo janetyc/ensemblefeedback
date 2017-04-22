@@ -64,10 +64,11 @@
   background-color: LightGray;
 }
 .loc-hovered{
-    background-color: LightGray !important; 
+    background-color: LightGray !important;
 }
 .loc-selected{
-    background-color: LightGray !important; 
+    background-color: #333 !important; 
+    color: #fff;
 }
 .feedback {
   border: 1px #cacaca solid;
