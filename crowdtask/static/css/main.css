@@ -95,7 +95,7 @@ body {
 
 .title {
     color: white;
-    margin-left: 1%;
+    padding-left: 1%;
 }
 .title a{ color: white; text-decoration: none; }
 .highlight-sentence:hover{
