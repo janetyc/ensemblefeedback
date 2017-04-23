@@ -4,11 +4,15 @@
 <div class="success-area">
   <h1>Thanks for Your Contribution!</h1>
   {% if data.verified_string %}
-  <p>Please copy verified code: <span class="verified-code">{{ data.verified_string }}</span>, and paste it to the answer field in Mturk page.</p>
+    {% if data.experiment_flow %}
+      <p>Please copy verified code: <span class="verified-code">{{ data.verified_string }}</span>, and paste it to the questionnaire.</p>
+    {% else %}
+      <p>Please copy verified code: <span class="verified-code">{{ data.verified_string }}</span>, and paste it to the answer field in Mturk page.</p>
+    {% endif %}
   {% endif %}
   {% if data.experiment_flow %}
-  	<p><a href="{{ url_for('views.pre_experiment', flow=data.experiment_flow, user=data.create_user) }}">Home</a></p>
-    <p>請填寫問卷：<a href="https://goo.gl/forms/T2DMI1HP69z4P1ix2" target="_bank">https://goo.gl/forms/T2DMI1HP69z4P1ix2</a></p>>
+  	<p>請填寫問卷：<a href="https://goo.gl/forms/T2DMI1HP69z4P1ix2" target="_bank">https://goo.gl/forms/T2DMI1HP69z4P1ix2</a></p>
+    <sapn style="border: 1px #0B346E solid; padding: 7px;"><a href="{{ url_for('views.pre_experiment', flow=data.experiment_flow, user=data.create_user) }}" style="color: #0B346E;">返回實驗首頁</a></span>
   {% else %}
   	<p><a href="{{ url_for('views.index') }}">Home</a></p>
   {% endif %}
