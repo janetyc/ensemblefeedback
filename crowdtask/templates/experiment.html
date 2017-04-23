@@ -15,13 +15,13 @@
 </div>
 <div id="popup-create" class="ui small modal">
     <div class="header">
-        Create a Username
+        Input Your Email
     </div>
     <div class="add-area">
         <form class="ui form">
             <div class="field">
-                <label>User ID</label>
-                <input type="text" name="user" placeholder="Username (between 6 to 20 characters)">
+                <label>Please input your email</label>
+                <input type="text" name="user" placeholder="Please input your email">
             </div>
         </form>
     </div>
@@ -33,10 +33,10 @@
 </div>
 <div id="popup-confirm" class="ui small modal">
     <div class="header">
-    	Confirm Your Username
+    	Confirm Your Email
     </div>
     <div class="add-area">
-    	<p>Is this You?</p>
+    	<p>Is this Your Email?</p>
     	<h1 style="text-align: center">{{data.create_user}}</h1>
     	<div class="ui error message" style="visibility: hidden;">
     		<p>Oops! It seems we mistook you for someone else. Please contact us to get a new link!</p>
@@ -110,19 +110,19 @@
         $('.ui.form').form({
             inline: true,
             fields: {
-                user: {
-                    identifier: 'user',
-                    rules: [
-                        {
-                            type   : 'minLength[6]',
-                            prompt : 'Wrong length of username'
-                        },
-                        {
-                            type   : 'maxLength[20]',
-                            prompt : 'Wrong length of username'
-                        },
-                    ]
-                }
+                // user: {
+                //     identifier: 'user',
+                //     rules: [
+                //         {
+                //             type   : 'minLength[6]',
+                //             prompt : 'Wrong length of username'
+                //         },
+                //         {
+                //             type   : 'maxLength[20]',
+                //             prompt : 'Wrong length of username'
+                //         },
+                //     ]
+                // }
             }
         });
     });
