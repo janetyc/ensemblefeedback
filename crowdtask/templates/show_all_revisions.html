@@ -1,0 +1,11 @@
+{% extends "clean_base.html" %}
+{% block content %}
+<section>
+	<div class="article-title">Show All Revisions</div>
+    <ul>
+    {% for revision in data %}
+    <li><a href="{{ url_for('views.show_revision', revision_id=revision.revision_id)}}">Revision {{revision.revision_id}}: {{revision.title}} (article {{revision.article_id}},{{revision.article_authors}},{{revision.created_user}})</a></li>
+    {% endfor %}
+    </ul>
+</section>
+{% endblock %}

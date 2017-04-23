@@ -1,0 +1,23 @@
+{% extends "clean_base.html" %}
+{% block content %}
+<div><a href="{{ url_for('views.show_all_revisions')}}">All Revisions</a> > Revision {{ data.revision_id }}</div>
+<h3>
+    {{data.article_title}} (Created by {{data.article_authors}} / Revised by {{data.created_user}})
+</h3>
+<section>
+	<div>feedback id: {{ data.feedback_id }}</div>
+	<div>feedback order: {{ data.feedback_order }}</div>
+	<div>
+		<div>article content:</div>
+		<div style="border: 1px #555 solid; padding: 7px;">{{ data.article_content }}</div>
+	</div>	
+	<div>
+		<div>revision content:</div>
+		{% for r_content in data.revision_content %}
+			<div style="font-weight: bold;">stage {{ loop.index }}</div>
+			<div style="border: 1px #555 solid; padding: 7px;">{{ r_content.revision_content }}</div>
+		{% endfor %}
+	</div>
+</section>
+
+{% endblock %}
