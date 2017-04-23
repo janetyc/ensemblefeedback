@@ -1,9 +1,9 @@
 {% extends "clean_base.html" %}
 {% block content %}
-<span><a href="{{ url_for('views.show_all_articles')}}">All Articles</a> > Article {{ data.id }}</span>
-<header>
+<div><a href="{{ url_for('views.show_all_articles')}}">All Articles</a> > Article {{ data.id }}</div>
+<h3>
     {{data.title}}({{data.authors}})
-</header>
+</h3>
 <section>
     {% for paragraph in data.paragraphs %}
         <p>{{ paragraph[1] }}</p>

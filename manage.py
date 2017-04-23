@@ -119,7 +119,7 @@ def import_feedback(directory, filename):
 
         print "move feedback to feedback-in-db folder ..."
         if isfile(join('feedback-in-db',file)):
-            print "file has already existed in data-in-db folder..."
+            print "file has already existed in feedback-in-db folder..."
         else:
             shutil.move('%s/%s' % (directory, file), 'feedback-in-db')
             shutil.move('%s/%s' % (directory, txt_file), 'feedback-in-db')

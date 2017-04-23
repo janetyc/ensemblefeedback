@@ -70,7 +70,6 @@ def show_ensemble_all():
 
     return render_template('show_all_feedbacks.html', data=data_list)
 
-
 @views.route('/comparison', methods=('GET','POST'))
 def get_compair_pair():
     verified_string = generate_verified_str(6)
@@ -156,6 +155,58 @@ def show_article(article_id):
 
     return render_template('article.html', data=data)
 
+@views.route('/all_revisions', methods=('GET','POST'))
+def show_all_revisions():
+    all_revisions = DBQuery().get_all_revisions()
+    data_list = []
+
+    for revision in all_revisions:
+        revision_id = revision.id
+        feedback_id = revision.feedback_id
+        feedback_order = revision.feedback_order
+        created_user = revision.created_user
+
+        article_id = revision.article_id
+        article = DBQuery().get_article_by_id(article_id)
+        feedback = DBQuery().get_feedback_by_id(feedback_id)
+        article_authors = article.authors
+        title = article.title
+
+        data = {
+            "revision_id": revision_id,
+            "feedback_id": feedback_id,
+            "feedback_order": feedback_order,
+            "created_user": created_user,
+
+            "article_content": feedback.content,
+
+            "article_id": article_id,
+            "article_authors": article_authors,
+            "title": title
+        }
+        data_list.append(data)
+
+    return render_template('show_all_revisions.html', data=data_list)
+
+@views.route('/revision/<revision_id>', methods=('GET','POST'))
+def show_revision(revision_id):
+
+    revision = DBQuery().get_revision_by_id(int(revision_id))
+    article = DBQuery().get_article_by_id(revision.article_id)
+
+    data = {
+        "revision_id": revision.id,
+        "article_id": revision.article_id,
+        "feedback_id": revision.feedback_id,
+        "feedback_order": revision.feedback_order,
+        "revision_content": revision.revision_content,
+        "created_user": revision.created_user,
+
+        "article_title": article.title,
+        "article_content": article.content,
+        "article_authors": article.authors
+    }
+    return render_template('revision.html',data=data)
 
 ###############################################
 #      Revision Task - ensemble feedback      #
@@ -206,8 +257,8 @@ def pre_experiment():
         [feedback_id, order] = element.split("-")
         feedback_ids.append(feedback_id)
         orders.append(order)
-        revison = DBQuery().get_revision_by_feedback_id_and_user(feedback_id, create_user)
-        if revison is None:
+        revision = DBQuery().get_revision_by_feedback_id_and_user(feedback_id, create_user)
+        if revision is None:
             done.append(0)
         else:
             done.append(1)

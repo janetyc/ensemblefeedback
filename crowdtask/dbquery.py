@@ -114,6 +114,10 @@ class DBQuery(object):
         return feedback
 
     # revision
+    def get_all_revisions(self):
+        all_revisions = Revision.query.order_by(Revision.id).all()
+        return all_revisions
+        
     def get_revision_by_id(self, revision_id):
         revision = Revision.query.filter_by(id=revision_id).first()
         return revision
