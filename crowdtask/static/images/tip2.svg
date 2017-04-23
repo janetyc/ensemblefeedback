@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="806px" height="239px" viewBox="0 0 806 239" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M9,201 L798,201" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-3" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-14" fill="#8FBAFF" sketch:type="MSShapeGroup" x="5" y="6" width="260" height="40"></rect>
+            <rect id="Rectangle-14" fill="#A7E9A7" sketch:type="MSShapeGroup" x="273" y="6" width="260" height="40"></rect>
+            <rect id="Rectangle-14" fill="#FFB0E1" sketch:type="MSShapeGroup" x="540" y="6" width="260" height="40"></rect>
+            <text id="Content-&amp;-Structure" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="22" font-weight="bold" line-spacing="26" letter-spacing="0.299999982" fill="#1F1F4E">
+                <tspan x="27" y="39">Content &amp; Structure</tspan>
+            </text>
+            <text id="Language" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="22" font-weight="bold" line-spacing="26" letter-spacing="0.299999982" fill="#23561E">
+                <tspan x="349" y="39">Language</tspan>
+            </text>
+            <text id="Mechanics" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="22" font-weight="bold" line-spacing="26" letter-spacing="0.299999982" fill="#A8008C">
+                <tspan x="612" y="39">Mechanics</tspan>
+            </text>
+            <rect id="Rectangle-14" stroke="#A7E9A6" stroke-width="2" sketch:type="MSShapeGroup" x="273" y="56" width="260" height="133"></rect>
+            <rect id="Rectangle-14" stroke="#8FBAFF" stroke-width="2" sketch:type="MSShapeGroup" x="5" y="56" width="260" height="133"></rect>
+            <rect id="Rectangle-14" stroke="#FFB0E0" stroke-width="2" sketch:type="MSShapeGroup" x="540" y="56" width="260" height="133"></rect>
+            <text id="--Punctuation" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="20" font-weight="420" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="564" y="89">- Punctuation</tspan>
+                <tspan x="564" y="115">- Spelling</tspan>
+                <tspan x="564" y="141">- Format</tspan>
+            </text>
+            <text id="--Language-use" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="20" font-weight="420" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="294" y="89">- </tspan>
+                <tspan x="305.945455" y="89" letter-spacing="0.247933865">Language use</tspan>
+                <tspan x="294" y="115" letter-spacing="0.247933865">- Word choice</tspan>
+                <tspan x="294" y="141" letter-spacing="0.247933865">- Grammar</tspan>
+                <tspan x="294" y="167" letter-spacing="0.247933865">- Sentence structure</tspan>
+            </text>
+            <text id="--Thesis-or-focus" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="20" font-weight="420" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="27" y="89">- </tspan>
+                <tspan x="38.4654545" y="89" letter-spacing="0.247933865">Thesis or focus</tspan>
+                <tspan x="27" y="115" letter-spacing="0.247933865">- Audience</tspan>
+                <tspan x="27" y="141" letter-spacing="0.247933865">- Organization</tspan>
+                <tspan x="27" y="167" letter-spacing="0.247933865">- Development</tspan>
+            </text>
+            <g id="Line">
+                <use stroke="#000000" stroke-width="2" stroke-linecap="square" fill="#000000" fill-rule="evenodd" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                <use stroke="none" fill="none" xlink:href="#path-1"></use>
+            </g>
+            <path id="Line-decoration-1" d="M9,201 L19.8,198 L19.8,204 L9,201 Z" stroke="#000000" stroke-width="2" stroke-linecap="square" fill="#000000"></path>
+            <path id="Line-decoration-2" d="M798,201 L787.2,198 L787.2,204 L798,201 Z" stroke="#000000" stroke-width="2" stroke-linecap="square" fill="#000000"></path>
+            <text id="High-Level" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="20" font-weight="bold" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="70" y="230">High-Level</tspan>
+            </text>
+            <text id="Low-Level" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="20" font-weight="bold" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="660" y="230">Low-Level</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="848px" height="584px" viewBox="0 0 848 584" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
+    <title>essay structure</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="essay-structure" sketch:type="MSArtboardGroup">
+            <path d="M6,440 L440.839996,440 L391.152212,531 L55.6837258,531 L6,440 Z" id="Rectangle-1" fill="#555555" sketch:type="MSShapeGroup" transform="translate(223.419998, 485.500000) scale(1, -1) translate(-223.419998, -485.500000) "></path>
+            <path d="M6,20 L440.839996,20 L391.152212,111 L55.6837258,111 L6,20 Z" id="Rectangle-1" fill="#555555" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-2" fill="#555555" sketch:type="MSShapeGroup" x="56" y="125" width="334.771806" height="91"></rect>
+            <rect id="Rectangle-2" fill="#555555" sketch:type="MSShapeGroup" x="56" y="230" width="334.771806" height="91"></rect>
+            <rect id="Rectangle-2" fill="#555555" sketch:type="MSShapeGroup" x="56" y="335" width="334.771806" height="91"></rect>
+            <text id="Body-Paragraph-1" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="24" font-weight="bold" line-spacing="26" letter-spacing="0.327272743" fill="#FFFFFF">
+                <tspan x="119" y="183">Body Paragrap</tspan>
+                <tspan x="294.566546" y="183" letter-spacing="0.357024819">h 1</tspan>
+            </text>
+            <text id="Body-Paragraph-2" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="24" font-weight="bold" line-spacing="26" letter-spacing="0.327272743" fill="#FFFFFF">
+                <tspan x="119" y="288">Body Paragrap</tspan>
+                <tspan x="294.566546" y="288" letter-spacing="0.357024819">h 2</tspan>
+            </text>
+            <text id="Body-Paragraph-3" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="24" font-weight="bold" line-spacing="26" letter-spacing="0.327272743" fill="#FFFFFF">
+                <tspan x="119" y="393">Body Paragrap</tspan>
+                <tspan x="294.566546" y="393" letter-spacing="0.357024819">h 3</tspan>
+            </text>
+            <text id="Conclusion" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="24" font-weight="bold" line-spacing="26" letter-spacing="0.327272743" fill="#FFFFFF">
+                <tspan x="157" y="498">Conclusion</tspan>
+            </text>
+            <text id="Introduction" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="24" font-weight="bold" line-spacing="26" letter-spacing="0.327272743" fill="#FFFFFF">
+                <tspan x="151" y="78">Introduction</tspan>
+            </text>
+            <rect id="Rectangle-2" fill="#555555" sketch:type="MSShapeGroup" x="503" y="147" width="334.771806" height="268"></rect>
+            <rect id="Rectangle-2" fill="#F1F1F1" sketch:type="MSShapeGroup" x="517" y="160" width="307" height="40"></rect>
+            <text id="Topic-Sentence" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="18" font-weight="bold" line-spacing="26" letter-spacing="0.24545455" fill="#555454">
+                <tspan x="605" y="186">Topic Sentence</tspan>
+            </text>
+            <rect id="Rectangle-2" fill="#2D9BC2" sketch:type="MSShapeGroup" x="517" y="209" width="307" height="40"></rect>
+            <rect id="Rectangle-2" fill="#2E9BC1" sketch:type="MSShapeGroup" x="517" y="258" width="307" height="40"></rect>
+            <rect id="Rectangle-2" fill="#2E9BC1" sketch:type="MSShapeGroup" x="517" y="307" width="307" height="40"></rect>
+            <rect id="Rectangle-2" fill="#F1F1F1" sketch:type="MSShapeGroup" x="517" y="359" width="307" height="40"></rect>
+            <text id="Concluding-Sentence" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="18" font-weight="bold" line-spacing="26" letter-spacing="0.24545455" fill="#555454">
+                <tspan x="586" y="386">Concluding Sentence</tspan>
+            </text>
+            <text id="Supporting-Sentence-" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="18" font-weight="bold" line-spacing="26" letter-spacing="0.24545455" fill="#FFFFFF">
+                <tspan x="578" y="234">Supporting Sentence 1</tspan>
+            </text>
+            <text id="Supporting-Sentence-" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="18" font-weight="bold" line-spacing="26" letter-spacing="0.24545455" fill="#FFFFFF">
+                <tspan x="578" y="283">Supporting Sentence 2</tspan>
+            </text>
+            <text id="Supporting-Sentence-" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="18" font-weight="bold" line-spacing="26" letter-spacing="0.24545455" fill="#FFFFFF">
+                <tspan x="578" y="331">Supporting Sentence 3</tspan>
+            </text>
+            <text id="Body-Paragraph-Struc" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="24" font-weight="bold" line-spacing="26" letter-spacing="0.327272713" fill="#555454">
+                <tspan x="517" y="458">Body Paragraph Structure</tspan>
+            </text>
+            <text id="Essay-Structure" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="30" font-weight="bold" line-spacing="26" letter-spacing="0.409090936" fill="#555454">
+                <tspan x="112" y="583">Essay Structure</tspan>
+            </text>
+            <rect id="Rectangle-12" fill="#FFA541" sketch:type="MSShapeGroup" x="484" y="18" width="191" height="30"></rect>
+            <text id="Hook" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="18" font-weight="bold" line-spacing="26" letter-spacing="0.24545455" fill="#FFFFFF">
+                <tspan x="554" y="39">Hook</tspan>
+            </text>
+            <rect id="Rectangle-12" fill="#3BD88F" sketch:type="MSShapeGroup" x="485" y="86" width="191" height="30"></rect>
+            <text id="Thesis-Statement" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="18" font-weight="bold" line-spacing="26" letter-spacing="0.24545455" fill="#FFFFFF">
+                <tspan x="505" y="106">Thesis Statement</tspan>
+            </text>
+            <path d="M485,100 L381.95632,100" id="Line" stroke="#3BD88F" stroke-width="3" stroke-linecap="square" fill="#3AD88F" sketch:type="MSShapeGroup"></path>
+            <path id="Line-decoration-1" d="M381.95632,100 L392.75632,103 L392.75632,97 L381.95632,100 Z" stroke="#3BD88F" stroke-width="3" stroke-linecap="square" fill="#3AD88F"></path>
+            <path d="M490.5,33 L402.95632,33" id="Line" stroke="#FFA441" stroke-width="3" stroke-linecap="square" fill="#FEA642" sketch:type="MSShapeGroup"></path>
+            <path id="Line-decoration-1" d="M402.95632,33 L413.75632,36 L413.75632,30 L402.95632,33 Z" stroke="#FFA441" stroke-width="3" stroke-linecap="square" fill="#FEA642"></path>
+            <path d="M421,126 L436.52818,134.966372 L436.52818,268.516814 L450,275 L436.52818,281.955752 L436.52818,416.053333 L421,424" id="Path-3" stroke="#555556" stroke-width="2" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

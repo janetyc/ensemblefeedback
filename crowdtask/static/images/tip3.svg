@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="715px" height="553px" viewBox="0 0 715 553" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-4" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-22" fill="#565554" sketch:type="MSShapeGroup" x="0" y="0" width="715" height="68"></rect>
+            <text id="專業英文寫作必須滿足英文修辭學的兩個主要" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="24" font-weight="526" line-spacing="26" letter-spacing="0.327272713" fill="#FFFFFF">
+                <tspan x="89" y="51">專業英文寫作必須滿足英文修辭學的兩個主要準則</tspan>
+            </text>
+            <text id="一致性-(Unity)" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="32" y="107">一致性 (Unity)</tspan>
+            </text>
+            <text id="連貫性-(Coherence)" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="32" y="312">連貫性 (Coherence)</tspan>
+            </text>
+            <rect id="Rectangle-20" stroke="#000000" stroke-width="2" sketch:type="MSShapeGroup" x="32" y="381" width="631" height="146"></rect>
+            <text id="一個段落只能有一個主要論點(main-i" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="260" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="32" y="139">一個段落只能有一個主要論點(main idea)，而且從頭到尾都是在描述</tspan>
+                <tspan x="32" y="165">與此論點相關的事情。</tspan>
+            </text>
+            <text id="達成一致性的方法如下：" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="260" line-spacing="26" letter-spacing="0.25" fill="#000000">
+                <tspan x="42" y="205">達成一致性的方法如下：</tspan>
+            </text>
+            <circle id="Oval-1" fill="#000000" sketch:type="MSShapeGroup" cx="51.5" cy="222.5" r="2.5"></circle>
+            <text id="連貫性指的是句子內、句子間以及段落內、段" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="260" line-spacing="26" letter-spacing="0.272727251" fill="#000000">
+                <tspan x="32" y="343">連貫性指的是句子內、句子間以及段落內、段落間必須有邏輯性的連</tspan>
+                <tspan x="32" y="369">貫，所有論點環環相扣，組合成一篇清楚易讀的文章。</tspan>
+            </text>
+            <text id="達成連貫性的方法如下：" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="260" line-spacing="26" letter-spacing="0.25" fill="#000000">
+                <tspan x="43" y="413">達成連貫性的方法如下：</tspan>
+            </text>
+            <rect id="Rectangle-20" stroke="#000000" stroke-width="2" sketch:type="MSShapeGroup" x="31" y="177" width="631" height="90"></rect>
+            <circle id="Oval-1" fill="#000000" sketch:type="MSShapeGroup" cx="51.5" cy="247.5" r="2.5"></circle>
+            <circle id="Oval-1" fill="#000000" sketch:type="MSShapeGroup" cx="51.5" cy="431.5" r="2.5"></circle>
+            <circle id="Oval-1" fill="#000000" sketch:type="MSShapeGroup" cx="51.5" cy="456.5" r="2.5"></circle>
+            <circle id="Oval-1" fill="#000000" sketch:type="MSShapeGroup" cx="51.5" cy="481.5" r="2.5"></circle>
+            <circle id="Oval-1" fill="#000000" sketch:type="MSShapeGroup" cx="51.5" cy="507.5" r="2.5"></circle>
+            <text id="Type-something" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="260" line-spacing="26" letter-spacing="0.25" fill="#000000">
+                <tspan x="62" y="231">所有次要論點(sub-point)都必須呼應主要論點(main idea)</tspan>
+                <tspan x="62" y="257">沒有任何不相關的句子出現</tspan>
+            </text>
+            <text id="Type-something" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="260" line-spacing="26" letter-spacing="0.25" fill="#000000">
+                <tspan x="63" y="440">重複關鍵字</tspan>
+                <tspan x="63" y="466">使用一致的代名詞</tspan>
+                <tspan x="63" y="492">使用適當的轉折語去連接論點</tspan>
+                <tspan x="63" y="518">以邏輯性順序去排列想要陳述的論點</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
