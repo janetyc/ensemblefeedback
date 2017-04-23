@@ -11,7 +11,7 @@
     {% endif %}
   {% endif %}
   {% if data.experiment_flow %}
-  	<p>請填寫問卷：<a href="https://goo.gl/forms/T2DMI1HP69z4P1ix2" target="_bank">https://goo.gl/forms/T2DMI1HP69z4P1ix2</a></p>
+  	<p>請完成三次任務者，填寫後問卷：<a href="https://goo.gl/forms/T2DMI1HP69z4P1ix2" target="_bank">https://goo.gl/forms/T2DMI1HP69z4P1ix2</a></p>
     <sapn style="border: 1px #0B346E solid; padding: 7px;"><a href="{{ url_for('views.pre_experiment', flow=data.experiment_flow, user=data.create_user) }}" style="color: #0B346E;">返回實驗首頁</a></span>
   {% else %}
   	<p><a href="{{ url_for('views.index') }}">Home</a></p>
