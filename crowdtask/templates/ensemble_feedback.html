@@ -37,11 +37,18 @@
             <td>
                 <div>
                     <div id='history' class='ui styled feedback-block shadow'></div>
-                    <div id="btn_next" class="ui button black" tabindex="0" onclick="nextstage()">Next</div>
+                    <div id="btn_next" class="ui button black" tabindex="0">Next</div>
+                    <!-- <div id="btn_next" class="ui button black" tabindex="0" onclick="nextstage()">Next</div> -->
                 </div>
             </td>
         </tr>
     </table>
+    <div id="reminder-check" class="ui basic modal">
+        <div class="ui icon header">
+            <h2 id="reminder-msg" style="border: 1px #fff solid; padding: 20px;"></h2>
+        </div>
+        <div id="go-to-next" class="ui green ok inverted button float-right" style="margin-right: 25px;" onclick="nextstage()">Next</div>
+    </div>
     <meta id="verified_string" content="{{ data.verified_string }}">
     <meta id="article_id" content="{{ data.article_id }}">
     <meta id="create_user" content="{{ data.create_user }}">
@@ -61,6 +68,26 @@
         //$(".accordion").accordion();
         // Remove href of Ensemble title
         $('.ensemble-title').removeAttr('href');
+
+
+        //check empty area
+        $('#btn_next').click(function(){
+            var r_content = $("#revision_content").val();
+
+            if(r_content == ""){
+                $('#reminder-msg').text("您的 Editing Area 是空的唷！！！請填入您的改寫內容！！");
+                $('#go-to-next').hide();
+            }else{
+                if($order == "ALL"){
+                    $('#reminder-msg').text("恭喜您完成改寫，確定繳交改版文章請按 Finish!");
+                }else{
+                    $('#reminder-msg').text("恭喜您完成第"+$("#version").text()+"階段的改寫，確定進入下階段修改請按 "+$('#go-to-next').text()+"!");    
+                }
+                $('#go-to-next').show();
+            }
+            $('#reminder-check').modal('show').modal('refresh');
+        })
+
     });
 </script>
 {% endblock %}

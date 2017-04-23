@@ -15,7 +15,15 @@
         
 	</div>
     <div id="revision-mission" class="ui basic modal">
-        <div class="ui icon header">待會兒，您將進入 Revision Task，以下為任務與介面說明。</div>
+        <div class="ui icon header">
+            
+            {% if data.order != "ALL" %}
+            <h2>此次任務為<span style="color: #DB0A79;">3 階段式</span>的改版，<span style="color: #DB0A79;">各階段</span>將收到不同類型的建議。</h2>
+            {% else %}
+            <h2>此次任務為<span style="color: #ff9933;">1 階段式</span>的改版，您將<span style="color: #ff9933;">同時</span>收到不同類型的建議。</h2>
+            {% endif %}
+            <div>待會兒，您將進入 Revision Task，以下為任務與介面說明。</div>
+        </div>
         <img src="/static/images/revision-mission.svg" style="width: 100%; margin-bottom: 7px;" alt="revision mission">
         
         <a class="ui green ok inverted button float-right" href="/ensemble/{{data.feedback_id}}?flow={{data.experiment_flow}}&order={{data.order}}&user={{data.create_user}}">OK! I understand!</a>

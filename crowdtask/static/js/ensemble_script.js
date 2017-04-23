@@ -48,6 +48,7 @@ function disable(e){
 
 function finish(){
   console.log("Finish");
+  $('#reminder-check').modal('hide');
   //return 0;
 
   var results = new Array();
@@ -112,7 +113,8 @@ function finish(){
 }
 
 function nextstage(){
-  
+  $('#reminder-check').modal('hide');
+
   if($order == "HML"){
     
     $(".feedback[type_id="+$str+"]").hide(); //hide feedback
@@ -158,9 +160,12 @@ function nextstage(){
     document.getElementById('version').innerHTML = $version;
 
     if($version>2){
-      btn = document.getElementById('btn_next')
+      btn = document.getElementById('btn_next');
       btn.innerHTML='Finish';
-      btn.setAttribute('onclick','finish()');
+
+      var btn2 = document.getElementById('go-to-next');
+      btn2.innerHTML='Finish';
+      btn2.setAttribute('onclick','finish()');
     }
   }else if($order == "LMH"){
 
@@ -203,15 +208,20 @@ function nextstage(){
     document.getElementById('version').innerHTML = $version;
 
     if($version>2){
-      btn = document.getElementById('btn_next')
+      btn = document.getElementById('btn_next');
       btn.innerHTML='Finish';
-      btn.setAttribute('onclick','finish()');
+
+      var btn2 = document.getElementById('go-to-next');
+      btn2.innerHTML='Finish';
+      btn2.setAttribute('onclick','finish()');
     }
 
   }else{
-    btn = document.getElementById('btn_next')
+    btn = document.getElementById('btn_next');
     btn.innerHTML='Finish';
-    btn.setAttribute('onclick','finish()');
+    var btn2 = document.getElementById('go-to-next');
+    btn2.innerHTML='Finish';
+    btn2.setAttribute('onclick','finish()');
   }
 
   //save revision content
@@ -424,9 +434,12 @@ function loadJSON(jsonData){
         }
     }
     if($str == -1){
-      btn = document.getElementById('btn_next')
+      btn = document.getElementById('btn_next');
       btn.innerHTML='Finish';
-      btn.setAttribute('onclick','finish()');
+
+      var btn2 = document.getElementById('go-to-next');
+      btn2.innerHTML='Finish';
+      btn2.setAttribute('onclick','finish()');
     }
     else {
       document.getElementById('version').innerHTML = ++$version;
@@ -485,9 +498,12 @@ function readJson(file)
         }
     }
     if($str>=2 || $str<0){
-      btn = document.getElementById('btn_next')
+      btn = document.getElementById('btn_next');
       btn.innerHTML='Finish';
-      btn.setAttribute('onclick','finish()');
+
+      var btn2 = document.getElementById('go-to-next');
+      btn2.innerHTML='Finish';
+      btn2.setAttribute('onclick','finish()');
     }
     else {
       document.getElementById('version').innerHTML = ++$str;
