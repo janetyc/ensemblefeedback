@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="612px" height="383px" viewBox="0 0 612 383" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
+    <title>task-description</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="task-description" sketch:type="MSArtboardGroup">
+            <text id="此次實驗您將會執行-3-個任務。每一種任" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="18" font-weight="526" line-spacing="26" letter-spacing="-0.720000029" fill="#3F65BD">
+                <tspan x="23" y="329">此次實驗您將會執行 3 個任務。每一種任務將會試用 3 種不同的修改介面。</tspan>
+                <tspan x="23" y="355">完成每一個任務時，請填寫問卷，問卷出現於任務結束頁面。</tspan>
+            </text>
+            <g id="Triangle-1-+-Rectangle-23" sketch:type="MSLayerGroup" transform="translate(215.000000, 186.000000)" fill="#565554">
+                <path d="M17.9038462,38.5 L17.9038462,0.5 L37.6346154,19.5 L17.9038462,38.5 Z" id="Triangle-1" sketch:type="MSShapeGroup"></path>
+                <rect id="Rectangle-23" sketch:type="MSShapeGroup" x="0" y="12" width="18.2692308" height="15"></rect>
+            </g>
+            <rect id="Rectangle-24" stroke="#565554" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" x="93" y="150" width="122" height="110"></rect>
+            <g id="Triangle-1-+-Rectangle-23" sketch:type="MSLayerGroup" transform="translate(375.000000, 186.000000)" fill="#565554">
+                <path d="M17.9038462,38.5 L17.9038462,0.5 L37.6346154,19.5 L17.9038462,38.5 Z" id="Triangle-1" sketch:type="MSShapeGroup"></path>
+                <rect id="Rectangle-23" sketch:type="MSShapeGroup" x="0" y="12" width="18.2692308" height="15"></rect>
+            </g>
+            <rect id="Rectangle-24" stroke="#565554" stroke-width="2" fill="#565554" sketch:type="MSShapeGroup" x="11" y="11" width="245" height="39"></rect>
+            <rect id="Rectangle-24" stroke="#565554" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" x="412" y="150" width="122" height="110"></rect>
+            <rect id="Rectangle-24" stroke="#565554" stroke-width="2" fill="#565554" sketch:type="MSShapeGroup" x="412" y="150" width="122" height="46"></rect>
+            <text id="思考題目" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" letter-spacing="-0.800000012" fill="#565554">
+                <tspan x="116" y="236">思考題目</tspan>
+            </text>
+            <rect id="Rectangle-24" stroke="#565554" stroke-width="2" fill="#565554" sketch:type="MSShapeGroup" x="93" y="150" width="122" height="46"></rect>
+            <text id="Thinking" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" fill="#FFFFFF">
+                <tspan x="114" y="183">Thinking</tspan>
+            </text>
+            <rect id="Rectangle-24" stroke="#565554" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" x="253" y="151" width="122" height="110"></rect>
+            <text id="閱讀範文" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" letter-spacing="-0.800000012" fill="#565554">
+                <tspan x="276" y="237">閱讀範文</tspan>
+            </text>
+            <rect id="Rectangle-24" stroke="#565554" stroke-width="2" fill="#565554" sketch:type="MSShapeGroup" x="253" y="151" width="122" height="46"></rect>
+            <text id="Reading" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" fill="#FFFFFF">
+                <tspan x="275" y="184">Reading</tspan>
+            </text>
+            <text id="文章改寫" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" letter-spacing="-0.800000012" fill="#565554">
+                <tspan x="435" y="237">文章改寫</tspan>
+            </text>
+            <text id="Revising" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" fill="#FFFFFF">
+                <tspan x="433" y="184">Revising</tspan>
+            </text>
+            <text id="改寫任務-(Revision-Task)" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="20" font-weight="526" line-spacing="26" letter-spacing="-0.800000012" fill="#FFFFFF">
+                <tspan x="23" y="40">改寫任務 (Revision Task)</tspan>
+            </text>
+            <text id="改寫任務，是『思考-檢視-改寫』的過程。" sketch:type="MSTextLayer" font-family="PingFang TC" font-size="16" font-weight="526" line-spacing="26" letter-spacing="-0.640000045" fill="#565554">
+                <tspan x="21" y="77">改寫任務，是</tspan>
+                <tspan x="113.16" y="77" letter-spacing="-0.568888903">『思考-檢視-改寫』的過程。透過不斷練習改寫任務，將有效提升您</tspan>
+                <tspan x="21" y="103" letter-spacing="-0.568888903">『評量』(Evaluation) </tspan>
+                <tspan x="170.448889" y="103" letter-spacing="-0.568888903">與</tspan>
+                <tspan x="185.88" y="103" letter-spacing="-0.568888903">『</tspan>
+                <tspan x="201.311111" y="103" letter-spacing="-0.568888903">寫作</tspan>
+                <tspan x="232.173333" y="103" letter-spacing="-0.568888903">』(Writing) </tspan>
+                <tspan x="312.651555" y="103" letter-spacing="-0.568888903">的能力。</tspan>
+            </text>
+            <rect id="Rectangle-24" stroke="#3F65BC" stroke-width="2" sketch:type="MSShapeGroup" x="11" y="299" width="593" height="74"></rect>
+        </g>
+    </g>
+</svg>

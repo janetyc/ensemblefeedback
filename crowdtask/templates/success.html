@@ -8,6 +8,7 @@
   {% endif %}
   {% if data.experiment_flow %}
   	<p><a href="{{ url_for('views.pre_experiment', flow=data.experiment_flow, user=data.create_user) }}">Home</a></p>
+    <p>請填寫問卷：<a href="https://goo.gl/forms/T2DMI1HP69z4P1ix2" target="_bank">https://goo.gl/forms/T2DMI1HP69z4P1ix2</a></p>>
   {% else %}
   	<p><a href="{{ url_for('views.index') }}">Home</a></p>
   {% endif %}

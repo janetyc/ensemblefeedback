@@ -334,6 +334,10 @@ body {
 }
 .experiment-description{
     margin-top: 40px;
+    text-align: center;
+}
+.experiment-description img{
+    width: 70%;
 }
 
 /* ==============
@@ -705,6 +709,26 @@ header{
 .writing-tip-menu{
     overflow: hidden;
 }
+
+#main-area {
+    display: block;
+    overflow: hidden;
+}
+#main-area div{
+    display: block;
+    float: left;
+}
+    
+
+#article-area {
+    width: 70%;
+    border: 1px #ff0000 solid;
+}
+#feedback-area {
+    width: 20%;
+    border: 1px #00ff00 solid;
+}
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */
@@ -731,7 +755,9 @@ header{
         margin-right: 0;
     }
 
-
+    .experiment-description img{
+        width: 90%;
+    }
 /* ========================
     INTERMEDIATE: IE Fixes
    ======================== */
@@ -797,7 +823,10 @@ header{
         width: 75%;
         margin-left: 10%;
     }
-}
+    .experiment-description img{
+        width: 70%;
+    }
+    
 
 @media only screen and (min-width: 1140px) {
 
@@ -813,6 +842,9 @@ header{
     .center-area{
         width: 70%;
         margin-left: 15%;
+    }
+    .experiment-description img{
+        width: 70%;
     }
 }
 
