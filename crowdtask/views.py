@@ -289,7 +289,8 @@ def experiment(feedback_id):
     create_user = request.args.get('user', default="")
     order = request.args.get('order', default="")
     experiment_flow = request.args.get('flow', default="")
-    article = DBQuery().get_article_by_id(int(feedback_id))
+    feedback = DBQuery().get_feedback_by_id(feedback_id)
+    article = DBQuery().get_article_by_id(feedback.article_id)
     article_title = article.title
 
 
