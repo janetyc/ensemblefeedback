@@ -18,22 +18,22 @@
         // task3 feedback 1
     	$('.ensemble-title').removeAttr('href');
         // feedback 1
-        $('.task3').attr('href', '/experiment/{{data.feedback_id1}}?flow={{data.experiment_flow}}&order={{data.order1}}&user={{data.create_user}}');
+        $('.task1').attr('href', '/experiment/{{data.feedback_id1}}?flow={{data.experiment_flow}}&order={{data.order1}}&user={{data.create_user}}');
         // feedback 2
-        $('.task1').attr('href', '/experiment/{{data.feedback_id2}}?flow={{data.experiment_flow}}&order={{data.order2}}&user={{data.create_user}}');
+        $('.task2').attr('href', '/experiment/{{data.feedback_id2}}?flow={{data.experiment_flow}}&order={{data.order2}}&user={{data.create_user}}');
         // feedback 3
-        $('.task2').attr('href', '/experiment/{{data.feedback_id3}}?flow={{data.experiment_flow}}&order={{data.order3}}&user={{data.create_user}}');
+        $('.task3').attr('href', '/experiment/{{data.feedback_id3}}?flow={{data.experiment_flow}}&order={{data.order3}}&user={{data.create_user}}');
         // feedback 1
         if ({{data.order1_done}} == 1) {
-            $('.task3').addClass('disabled');
+            $('.task1').addClass('disabled');
         }
         // feedback 2
         if ({{data.order2_done}} == 1) {
-            $('.task1').addClass('disabled');
+            $('.task2').addClass('disabled');
         }
         //feedback 3
         if ({{data.order3_done}} == 1) {
-            $('.task2').addClass('disabled');
+            $('.task3').addClass('disabled');
         }
     });
 </script>
