@@ -290,7 +290,8 @@ def experiment(feedback_id):
     order = request.args.get('order', default="")
     experiment_flow = request.args.get('flow', default="")
     feedback = DBQuery().get_feedback_by_id(feedback_id)
-    article = DBQuery().get_article_by_id(feedback.article_id)
+    article_id = feedback.article_id
+    article = DBQuery().get_article_by_id(article_id)
     article_title = article.title
 
 
