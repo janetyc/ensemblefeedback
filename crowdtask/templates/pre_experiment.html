@@ -2,7 +2,7 @@
 {% block content %}
 <div class="experiment-description">
 	<img src="/static/images/task-description.svg" alt="task description">   
-    <p style="margin-top: 20px;">如果發現沒做過的任務的按鈕突然不能按了，或是已經做完的任務的按鈕又突然亮起來了，<br/>請不要擔心，因為我們正在後台調整文章順序，不會讓您做到重複的任務！</p>
+    <p style="margin-top: 20px;">如果發現沒做過的任務的按鈕突然不能按了，或是已經做完的任務的按鈕又突然亮起來了，<br/>請不要擔心，因為我們調整過文章順序，不會讓您做到重複的任務！</p>
 	<div class="task-buttons" style="text-align:center; margin: 10px;">
 		<a class="ui button olive task1" style="width: 27vh; margin: 15px;">Task 1</a>
         <a class="ui button green task2" style="width: 27vh; margin: 15px;">Task 2</a>
@@ -14,23 +14,23 @@
 {% block extra_js %}
 <script>
     $(function() {
-        // task1 feedback 2
-        // task2 feedback 3
-        // task3 feedback 1
+        // task1 feedback 3
+        // task2 feedback 1
+        // task3 feedback 2
     	$('.ensemble-title').removeAttr('href');
         // feedback 1
-        $('.task3').attr('href', '/experiment/{{data.feedback_id1}}?flow={{data.experiment_flow}}&order={{data.order1}}&user={{data.create_user}}');
+        $('.task1').attr('href', '/experiment/{{data.feedback_id1}}?flow={{data.experiment_flow}}&order={{data.order1}}&user={{data.create_user}}');
         // feedback 2
-        $('.task1').attr('href', '/experiment/{{data.feedback_id2}}?flow={{data.experiment_flow}}&order={{data.order2}}&user={{data.create_user}}');
+        $('.task3').attr('href', '/experiment/{{data.feedback_id2}}?flow={{data.experiment_flow}}&order={{data.order2}}&user={{data.create_user}}');
         // feedback 3
-        $('.task2').attr('href', '/experiment/{{data.feedback_id3}}?flow={{data.experiment_flow}}&order={{data.order3}}&user={{data.create_user}}');
+        $('.task1').attr('href', '/experiment/{{data.feedback_id3}}?flow={{data.experiment_flow}}&order={{data.order3}}&user={{data.create_user}}');
         // feedback 1
         if ({{data.order1_done}} == 1) {
-            $('.task3').addClass('disabled');
+            $('.task1').addClass('disabled');
         }
         // feedback 2
         if ({{data.order2_done}} == 1) {
-            $('.task1').addClass('disabled');
+            $('.task3').addClass('disabled');
         }
         //feedback 3
         if ({{data.order3_done}} == 1) {
