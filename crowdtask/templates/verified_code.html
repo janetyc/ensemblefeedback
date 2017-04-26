@@ -4,3 +4,10 @@
 <h1 style="text-align: center; color: #0347b5;">{{ code }}</h1>
 <h2 style="text-align: center; margin-top: 50px;">Thank you for your contribution!</h2>
 {% endblock %}
+{% block extra_js %}
+<script>
+    $(function() {
+    	$('.ensemble-title').removeAttr('href');
+    });
+</script>
+{% endblock %}

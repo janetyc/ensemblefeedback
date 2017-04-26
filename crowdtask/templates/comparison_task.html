@@ -69,6 +69,7 @@
 {% block extra_js %}
 <script>
 	$(document).ready(function() {
+		$('.ensemble-title').removeAttr('href');
 		{% if method == 'tag' %}
 			// Constant
 			var paraTag1 = 0;
