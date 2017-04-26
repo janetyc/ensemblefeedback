@@ -44,8 +44,8 @@ def init_comparison():
 @manager.command
 def init_evaluate():
     # initialize evaluate db
-    start = 65
-    end = 108
+    start = 109
+    end = 110
     for i in range(start, end + 1):
         DBQuery().add_evaluate_by_revision_id(i)
 
