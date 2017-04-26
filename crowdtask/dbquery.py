@@ -1,4 +1,4 @@
-from crowdtask.models import Article, Feedback, Revision
+from crowdtask.models import Article, Feedback, Revision, Evaluate
 from crowdtask.models import Task
 from crowdtask.models import Comparison
 from crowdtask import db
