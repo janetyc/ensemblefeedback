@@ -84,9 +84,9 @@ def comparison_task(pair_id, method, code, times):
     [p1, p2] = pair_id.split("_")
 
     article1 = DBQuery().get_evaluate_by_revision_id(p1)
-    paragraphs1 = article1.content.split("\n")
+    paragraphs1 = article1.revision_content.split("\n")
     article2 = DBQuery().get_evaluate_by_revision_id(p2)
-    paragraphs2 = article2.content.split("\n")
+    paragraphs2 = article2.revision_content.split("\n")
 
     list1 = []
     for i, paragraph in enumerate(paragraphs1):
@@ -99,20 +99,16 @@ def comparison_task(pair_id, method, code, times):
     sorted(list2)
     data = {
         "text1": {
-            "id": article1.id,
-            "title": article1.title,
-            "authors": article1.authors,
+            "id": p1,
             "paragraphs": list1
             },
         "text2": {
-            "id": article2.id,
-            "title": article2.title,
-            "authors": article2.authors,
+            "id": p2,
             "paragraphs": list2
             },
         }
     if method == "diff":
-        [diff1, diff2] = compare.compareText(article1.content, article2.content)
+        [diff1, diff2] = compare.compareText(article1.revision_content, article2.revision_content)
         return render_template('comparison_task.html', method=method,
                                pair_id=pair_id, data=data, code=code,
                                diff1=diff1, diff2=diff2, times=times)

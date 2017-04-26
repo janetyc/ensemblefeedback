@@ -15,7 +15,6 @@
 <section>
 	<div class="comparison1">
 		<div class="comparison-text">
-			<p class="comparison-title">{{data.text1.title}}</p>
 			{% if method == 'tag' %}
 				{% for paragraph in data.text1.paragraphs %}
 					<p class="text_split1">{{ paragraph[1] }}<p>
@@ -41,7 +40,6 @@
 	</div>
 	<div class="comparison2">
 		<div class="comparison-text">
-			<p class="comparison-title">{{data.text2.title}}</p>
 			{% if method == 'tag' %}
 				{% for paragraph in data.text2.paragraphs %}
 					<p class="text_split2">{{ paragraph[1] }}<p>
@@ -161,11 +159,8 @@
 			});
 		{% endif %}
 
-		// handle better button
-		var btncount = {{times}};
 
 		$(".btn1").click(function(event){
-			btncount++;
 
 			// Update to db
 			$.ajax({
@@ -178,16 +173,7 @@
                 },
                 dataType: 'json',               
                 success: function(data) {
-                	if (btncount >= 5)
-					{
-						window.location.href = "/verified/{{code}}";
-					} else {
-						var link = "/comparison";
-						{% if method is not none %}
-							link += "?mode={{method}}";
-						{% endif %}
-						window.location.href = link + "&ref=" + String(btncount);
-					}
+					window.location.href = "/verified/{{code}}";
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("Error");    
@@ -195,7 +181,6 @@
 			});
 		});
 		$(".btn2").click(function(event){
-			btncount++;
 
 			// update to db
 			$.ajax({
@@ -208,16 +193,7 @@
                 },
                 dataType: 'json',               
                 success: function(data) {
-                	if (btncount >= 1)
-					{
-						window.location.href = "/verified/{{code}}";
-					} else {
-						var link = "/comparison";
-						{% if method is not none %}
-							link += "?mode={{method}}";
-						{% endif %}
-						window.location.href = link + "&ref=" + String(btncount);
-					}
+					window.location.href = "/verified/{{code}}";
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("Error");    
