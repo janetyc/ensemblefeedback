@@ -19,7 +19,11 @@
 		, inject = '';
 		if (a.length) {
 			$(a).each(function(i, item) {
-				inject += '<span class="'+klass+(constant+i+1)+'" aria-hidden="true">'+item+'</span>'+after;
+				if (item != ""){
+					inject += '<span class="'+klass+(constant+i+1)+'" aria-hidden="true">'+item+'</span>'+after;
+				} else {
+					constant --;
+				}
 			});
 			t.attr('aria-label',text)
 			.empty()
@@ -84,6 +88,7 @@
 			start = 1;
 			constant = 0;
 		}
+
 		// Method calling logic
 		if ( method && methods[method] ) {
 			return methods[ method ].apply( this, [].slice.call( arguments, 1 ));
