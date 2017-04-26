@@ -34,7 +34,7 @@ def dropdb():
 def init_comparison():
     # initialize comparison db
     start = 65
-    end = 110
+    end = 112
     for i in range(start, end + 1):
         for j in range(i + 1, end + 1):
             pair_id = str(i) + "_" + str(j)
@@ -44,8 +44,8 @@ def init_comparison():
 @manager.command
 def init_evaluate():
     # initialize evaluate db
-    start = 109
-    end = 110
+    start = 111
+    end = 112
     for i in range(start, end + 1):
         DBQuery().add_evaluate_by_revision_id(i)
 
