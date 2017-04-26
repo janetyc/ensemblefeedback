@@ -34,7 +34,7 @@ def dropdb():
 def init_comparison():
     # initialize comparison db
     start = 65
-    end = 108
+    end = 110
     for i in range(start, end + 1):
         for j in range(i + 1, end + 1):
             pair_id = str(i) + "_" + str(j)
