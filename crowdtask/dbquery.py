@@ -48,6 +48,21 @@ class DBQuery(object):
         db.session.commit()
         return comparison.id
 
+    def add_comparison_by_pair(self, pair_id):
+        comparison = Comparison(pair_id, "", 0, 0, 0)
+        db.session.add(comparison)
+        db.session.commit()
+        return comparison.id
+
+    def add_evaluate_by_revision_id(self, revision_id):
+        revision = self.get_revision_by_id(revision_id)
+        evaluate = Evaluate(revision_id, revision.article_id,
+                            revision.feedback_id, revision.feedback_order,
+                            revision.revision_content[-1]["revision_content"])
+        db.session.add(evaluate)
+        db.session.commit()
+        return evaluate.id
+
     # ************************************************** #
     #               Get data from database               #
     # ************************************************** #

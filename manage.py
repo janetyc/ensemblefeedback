@@ -40,6 +40,15 @@ def init_comparison():
             DBQuery().add_comparison(pair_id, "", 0, 0, 0)
 
 
+@manager.command
+def init_evaluate():
+    # initialize evaluate db
+    start = 65
+    end = 108
+    for i in range(start, end + 1):
+        DBQuery().add_evaluate_by_revision_id(i)
+
+
 @manager.option('-d', '--dir', dest='directory', default='data')
 @manager.option('-n', '--filename', dest='filename', default=None)
 def import_articles(directory, filename):

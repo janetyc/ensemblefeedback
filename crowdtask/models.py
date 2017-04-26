@@ -124,3 +124,26 @@ class Revision(db.Model):
 
     def __repr__(self):
         return '<Revision %r>' % self.id
+
+class Evaluate(db.Model):
+    __tablename__ = 'evaluate'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    revision_id = db.Column(db.Integer)
+    article_id = db.Column(db.Integer)
+    feedback_id = db.Column(db.Integer)
+    feedback_order = db.Column(db.Text())
+    revision_content = db.Column(db.Text())
+    created_time = db.Column(db.DateTime())
+
+
+    def __init__(self, revision_id, article_id, feedback_id, feedback_order, revision_content):
+        self.revision_id = revision_id
+        self.article_id = article_id
+        self.feedback_id = feedback_id
+        self.feedback_order = feedback_order
+        self.revision_content = revision_content
+        self.created_time = datetime.utcnow()
+
+    def __repr__(self):
+        return '<Evaluate %r>' % self.id
