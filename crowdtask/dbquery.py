@@ -142,6 +142,11 @@ class DBQuery(object):
         revision = Revision.query.filter_by(feedback_id=feedback_id, created_user=created_user).first()
         return revision
 
+    # evaluate
+    def get_evaluate_by_revision_id(self, revision_id):
+        evaluate = Evaluate.query.filter_by(revision_id=revision_id).first()
+        return evaluate
+
     # ************************************************** #
     #               Update data from database            #
     # ************************************************** #

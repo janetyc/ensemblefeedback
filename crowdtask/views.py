@@ -77,25 +77,16 @@ def get_compair_pair():
     method = request.args.get('mode', default="diff")
     times = request.args.get('ref', default="0")
     pair_id = request.args.get('pair', default="")
-    if pair_id == "":
-        uncompare = DBQuery().get_uncompare_list()
-        if not uncompare:
-            if int(times) > 0:
-                return show_verify(verified_string)
-            else:
-                return render_template('task_finish.html')
-        else:
-            pair_id = DBQuery().get_compare_by_id(random.choice(uncompare)).pair_id
     return comparison_task(pair_id, method, verified_string, times)
 
 
 def comparison_task(pair_id, method, code, times):
     [p1, p2] = pair_id.split("_")
 
-    article1 = DBQuery().get_article_by_id(p1)
-    paragraphs1 = article1.content.split("<BR>")
-    article2 = DBQuery().get_article_by_id(p2)
-    paragraphs2 = article2.content.split("<BR>")
+    article1 = DBQuery().get_evaluate_by_revision_id(p1)
+    paragraphs1 = article1.content.split("\n")
+    article2 = DBQuery().get_evaluate_by_revision_id(p2)
+    paragraphs2 = article2.content.split("\n")
 
     list1 = []
     for i, paragraph in enumerate(paragraphs1):
