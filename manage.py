@@ -33,9 +33,10 @@ def dropdb():
 @manager.command
 def init_comparison():
     # initialize comparison db
-    article_count = DBQuery().get_article_count()
-    for i in range(1, article_count + 1):
-        for j in range(i + 1, article_count + 1):
+    start = 65
+    end = 108
+    for i in range(start, end + 1):
+        for j in range(i + 1, end + 1):
             pair_id = str(i) + "_" + str(j)
             DBQuery().add_comparison(pair_id, "", 0, 0, 0)
 
