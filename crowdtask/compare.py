@@ -8,6 +8,8 @@ def compareText(text1, text2):
     text2 = text2.replace("<BR>", "\n").replace(". ", ". \n").replace("! ", "! \n").replace("? ", "? \n")
     text1 = text1.splitlines()
     text2 = text2.splitlines()
+    text1 = filter(None, text1)
+    text2 = filter(None, text2)
     lineNum1 = len(text1)
     lineNum2 = len(text2)
 
