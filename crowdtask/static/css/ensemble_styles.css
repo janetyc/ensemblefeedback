@@ -67,8 +67,8 @@
     background-color: LightGray !important;
 }
 .loc-selected{
-    background-color: #DB0A79 !important; 
-    color: #fff;
+    background-color: #DB0A79 !important;
+    color: #fff !important;
 }
 .feedback {
   border: 1px #cacaca solid;
@@ -109,4 +109,15 @@
 .feedback-selected {
   /*border: 3px #ED5757 solid;*/
   border: 3px #DB0A79 solid;
+}
+.del-text{
+  color: #ff0000;
+  text-decoration:line-through  
+}
+.ins-text{
+  background-color: #fff;
+  background-image: url("/static/ins-icon.png");
+  background-repeat: no-repeat;
+  width: 5px;
+  height: 5px;
 }

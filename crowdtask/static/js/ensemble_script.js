@@ -300,7 +300,13 @@ function addText(i,c){
   e.innerHTML = c;
   return e;
 }
-
+function addIns(i){
+  e = document.createElement('span');
+  e.setAttribute('class',"ins ins_"+i);
+  e.setAttribute('i_start',i);
+  e.innerHTML = '';
+  return e; 
+}
 function display(txt)
 {
     var text = txt.split('\n');
@@ -320,6 +326,7 @@ function display(txt)
       for(j = 0; j < text[i].length; j++){
         e = addText(index,text[i][j]);
         document.getElementById('content').appendChild(e);
+        document.getElementById('content').appendChild(addIns(index));
         index += 1;
       }
       document.getElementById('content').innerHTML += '<br>';
@@ -331,9 +338,10 @@ function addElement(type, id, inner){
    e.innerHTML = inner;
    return e;
 }
+
 function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
   new_e = document.createElement("div");
-  new_e.setAttribute("class", 'mod '+e_type+' title '+e_type+"_styled");
+  new_e.setAttribute("class", 'mod '+e_type+' title '+e_type+"_styled "+e_title);
   new_e.setAttribute("i_start", i_s);
   new_e.setAttribute("i_end", i_e);
   new_e.setAttribute("e_id", e_type[4]);
@@ -350,7 +358,7 @@ function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
   new_e.appendChild(addElement("div",'ui huge star rating',''));
 
   new_e_2 = document.createElement("div");
-  new_e_2.setAttribute("class", 'mod content');
+  new_e_2.setAttribute("class", 'mod content '+e_title);
   new_e_2.setAttribute("i_start", i_s);
   new_e_2.setAttribute("i_end", i_e);
   new_e_2.setAttribute("e_id", e_type[4]);
@@ -383,15 +391,28 @@ function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
   //   new_e.style.display = 'none';
   //   new_e_2.style.display = 'none';
   // }
+
+  if(e_title == "Insert"){
+    var ins_ele = $(".ins_"+(i_s-1));
+    ins_ele.html("&nbsp;&nbsp;");
+    ins_ele.addClass("ins-text");
+  }
   for(i=i_s;i<=i_e;i++){
     var e = document.getElementById(i.toString());
-    // e.setAttribute('class',e_type);
-    e.classList.add(e_type);
+      // e.setAttribute('class',e_type);
+    if(e==null) continue;
     
+    if(e_title == "Delete") e.classList.add("del-text");
+    else if(e_title == "Comment") e.classList.add(e_type);
+
     if(!visibility){
-      e.setAttribute('style','background-color: white;');
+        e.setAttribute('style','background-color: white;');
     }
-  }
+  }   
+  
+  
+
+
   var new_item = document.createElement("div");
   
   new_item.setAttribute("id",'feedback_'+uid);
@@ -416,7 +437,6 @@ function loadText(text)
 }
 function loadJSON(jsonData){
     var json = $.parseJSON(jsonData);
-
     k = [1,1,1];
     num = 0;
     for(j = 0;j<json.length;j++){
@@ -425,12 +445,13 @@ function loadJSON(jsonData){
         if(e['mod_type']){
           if($str != -1) {
             visibility = (index==$str);
+            //var ind_start = isInt(e['index_start']) ? e['index_start'] : parseInt(e['index_start']);
+            //var ind_end = isInt(e['index_end']) ? e['index_end'] : parseInt(e['index_end']);
             addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],visibility);
           }else{
             addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],true);
           }
           // addMod(num++, k[index]++,e['modifier'],e['index_start'],e['index_end'],e['mod_type'],e['mod_history'],e['mod_comment'],false);
-
         }
     }
     if($str == -1){
@@ -486,6 +507,8 @@ function readJson(file)
     num = 0;
     for(j = 0;j<json.length;j++){
         e = json[j];
+        //var ind_start = isInt(e['index_start']) ? e['index_start'] : parseInt(e['index_start']);
+        //var ind_end = isInt(e['index_end']) ? e['index_end'] : parseInt(e['index_end']);
         index = parseInt(e['modifier'][4]);
         if(e['mod_type']){
           if($str>2 || $str<0){
@@ -563,39 +586,104 @@ var $middle_x = Math.floor(document.getElementById('history').offsetLeft);
 $("#origin").on("mouseover", "span", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
-  
-  if($str != -1){
-    var $this_list = document.getElementsByClassName('mod mod_'+$str);
-  }else{
-    var $this_list = document.getElementsByClassName('mod');
-  }
+  var $this_list = [];
 
-  for(i=0;i<$this_list.length;i++){
-    
-    var i_s = parseInt($this_list[i].getAttribute('i_start'));
-    var i_e = parseInt($this_list[i].getAttribute('i_end'));
-    if(i_s<= $id && i_e>= $id){
-      // $this_list[i].setAttribute('style',"background-color: White;");
-      $this_list[i].parentNode.classList.add('feedback-hovered');
-      // $this_list[i].classList.toggle('active');
-      for(i_x=i_s;i_x<=i_e;i_x++){
-        // document.getElementById(i_x).setAttribute('style','background-color: LightGray;');
-        if(!document.getElementById(i_x).classList.contains('loc-hovered'))
-          document.getElementById(i_x).classList.add('loc-hovered');
-        
+  if($t.hasClass("ins")){
+    if(!$t.hasClass('loc-hovered')){
+      $t.addClass('loc-hovered');
+    }
+  }else{
+    if($str != -1){
+      //var $this_list = document.getElementsByClassName('mod mod_'+$str);
+      $this_list = document.querySelectorAll('.mod.mod_'+$str+':not(.Insert)');
+    }else{
+      $this_list = document.querySelectorAll('.mod:not(.Insert)');
+      //var $this_list = document.getElementsByClassName('mod');
+    }
+
+    for(i=0;i<$this_list.length;i++){
+      var i_s = parseInt($this_list[i].getAttribute('i_start'));
+      var i_e = parseInt($this_list[i].getAttribute('i_end'));
+      
+      
+      if(i_s<= $id && i_e>= $id){
+        // $this_list[i].setAttribute('style',"background-color: White;");
+        $this_list[i].parentNode.classList.add('feedback-hovered');
+        // $this_list[i].classList.toggle('active');
+        for(i_x=i_s;i_x<=i_e;i_x++){
+          // document.getElementById(i_x).setAttribute('style','background-color: LightGray;');
+          if(!document.getElementById(i_x).classList.contains('loc-hovered')){
+            document.getElementById(i_x).classList.add('loc-hovered');
+            
+          }
+          
+        }
       }
     }
   }
+
+  
 });
-$("#origin").on("click", "span", function () {
+$("#origin").on("click", "span.ins", function () {
+  var $t = $(this);
+  var $id = parseInt($t.attr('i_start'))+1;
+
+  if($str != -1){
+    $this_list = document.querySelectorAll('.mod.mod_'+$str+".Insert");
+  }else{
+    $this_list = document.querySelectorAll('.mod.Insert');
+  }
+  for(i=0;i<$this_list.length;i++){
+    var i_s = parseInt($this_list[i].getAttribute('i_start'));
+    var i_e = parseInt($this_list[i].getAttribute('i_end'));
+
+    if(i_s<= $id && i_e>= $id){
+        var current = $t.hasClass('loc-selected');
+        
+        if(!current){
+          $('.loc-selected').removeClass('loc-selected');
+          $('.feedback-selected').removeClass('feedback-selected');
+          // $this_list[i].parentNode.classList.remove('feedback-selected');
+        }
+        for(i_x=i_s;i_x<=i_e;i_x++){
+          if(current){
+            $this_list[i].parentNode.classList.remove('feedback-selected');
+            $t.removeClass('loc-selected');
+          }
+          else{
+            $this_list[i].parentNode.classList.add('feedback-selected');
+            $t.addClass('loc-selected');
+          }
+        }
+
+        $offset = $('#'+i_s).offset();
+        $history = $('#history');
+
+        document.getElementById('history').scrollTop = ($this_list[i].offsetTop - $offset.top +20);
+        drawArrow($offset.left, $offset.top,$this_list[i].offsetLeft+$history.offset().left,
+          $this_list[i].offsetTop+$history.offset().top - $history.scrollTop());
+        
+        break;
+    }
+  }
+});
+$("#origin").on("click", "span:not('.Insert')", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
 
   
+  // if($str != -1){
+  //   var $this_list = $('.mod_'+$str);
+  // }else{
+  //   var $this_list = $('.mod');
+  // }
+
   if($str != -1){
-    var $this_list = $('.mod_'+$str);
+    //var $this_list = document.getElementsByClassName('mod mod_'+$str);
+    $this_list = document.querySelectorAll('.mod.mod_'+$str+':not(.Insert)');
   }else{
-    var $this_list = $('.mod');
+    $this_list = document.querySelectorAll('.mod:not(.Insert)');
+    //var $this_list = document.getElementsByClassName('mod');
   }
   
   for(i=0;i<$this_list.length;i++){
@@ -631,34 +719,52 @@ $("#origin").on("click", "span", function () {
         break;
     }
   }
+  
 
 });
 $("#origin").on("mouseleave", "span", function () {
   $('canvas').remove();
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
-  if($str != -1){
-    // var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
-    var $this_list = document.getElementsByClassName('mod mod_'+$str);
-  }else{
-    var $this_list = document.getElementsByClassName('mod');
-  }
-  for(i=0;i<$this_list.length;i++){
-    var e = $this_list[i];
-    var i_s = parseInt(e.getAttribute('i_start'));
-    var i_e = parseInt(e.getAttribute('i_end'));
-    if(i_s<= $id && i_e>= $id){
-      e.setAttribute('style',"background-color: none;");
-      $this_list[i].parentNode.classList.remove('feedback-hovered');
-      // $this_list[i].classList.toggle('active');
+  // if($str != -1){
+  //   // var $this_list = document.getElementsByClassName('mod mod_'+($str-1));
+  //   var $this_list = document.getElementsByClassName('mod mod_'+$str);
+  // }else{
+  //   var $this_list = document.getElementsByClassName('mod');
+  // }
 
-      for(i_x=i_s;i_x<=i_e;i_x++){
-        // document.getElementById(i_x).setAttribute('style',"background-color: none;");
-        if(document.getElementById(i_x).classList.contains('loc-hovered'))
-          document.getElementById(i_x).classList.remove('loc-hovered');
+  if($t.hasClass("ins")){
+    if($t.hasClass('loc-hovered')){
+      $t.removeClass('loc-hovered');
+    }
+  }else{
+    if($str != -1){
+      //var $this_list = document.getElementsByClassName('mod mod_'+$str);
+      $this_list = document.querySelectorAll('.mod.mod_'+$str+':not(.Insert)');
+    }else{
+      $this_list = document.querySelectorAll('.mod:not(.Insert)');
+      //var $this_list = document.getElementsByClassName('mod');
+    }
+
+    for(i=0;i<$this_list.length;i++){
+      var e = $this_list[i];
+      var i_s = parseInt(e.getAttribute('i_start'));
+      var i_e = parseInt(e.getAttribute('i_end'));
+      if(i_s<= $id && i_e>= $id){
+        e.setAttribute('style',"background-color: none;");
+        $this_list[i].parentNode.classList.remove('feedback-hovered');
+        // $this_list[i].classList.toggle('active');
+
+        for(i_x=i_s;i_x<=i_e;i_x++){
+          // document.getElementById(i_x).setAttribute('style',"background-color: none;");
+          if(document.getElementById(i_x).classList.contains('loc-hovered'))
+            document.getElementById(i_x).classList.remove('loc-hovered');
+        }
       }
     }
   }
+
+  
 });
 
 // Hover on history
