@@ -212,6 +212,7 @@ def ensemble_feedback(feedback_id):
         content = feedback.content.strip()
         feedback_content = feedback.feedback_content
         content_list = content.split("\n")
+        raw_content = "\n".join(content_list[1:])
         article_content = "\n".join(content_list)
 
     data = {
@@ -219,6 +220,7 @@ def ensemble_feedback(feedback_id):
         "feedback_id": feedback_id,
         "create_user": create_user,
         "article_content": article_content,
+        "raw_content": raw_content,
         "feedback_content": json.dumps(feedback_content),
 
         "verified_string": verified_string,
