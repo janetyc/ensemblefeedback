@@ -122,21 +122,29 @@ function nextstage(){
     //clear up text
     mod_list = $('span.mod_'+$str);
     for(i=0;i<mod_list.length;i++){
+        //mod_list[i].setAttribute('style','background-color: White;');
         mod_list[i].setAttribute('style','background-color: White;');
     }
+    $('.ins.mod_'+$str).hide();
+    $(".del-text.mod_"+$str).attr('style','background-color:#fff; text-decoration:none;color:#000;');
 
     //show feedback at the next stage
+    $(".del-text.mod_"+($str+1)).attr('style','text-decoration:line-through; color:#f00;');
+    $('.ins.mod_'+($str+1)).show();
     $(".feedback[type_id="+($str+1)+"]").show();
     mod_list = $('span.mod_'+($str+1));
     for(i=0;i<mod_list.length;i++){
         e = mod_list[i];
         if(!e.getAttribute('class')) continue
-        else if(e.getAttribute('class').includes('mod_0'))
+        else if(e.getAttribute('class').includes('mod_0')){
           e.setAttribute('style','background-color: #ccf2ff ;');
-        else if(e.getAttribute('class').includes('mod_1'))
+        }
+        else if(e.getAttribute('class').includes('mod_1')){
           e.setAttribute('style','background-color: #ebf5d6 ;');
-        else if(e.getAttribute('class').includes('mod_2'))
+        }
+        else if(e.getAttribute('class').includes('mod_2')){
           e.setAttribute('style','background-color: #ffcce6 ;');
+        }
         // if(!e.getAttribute('class')) continue
         // else if($str != -1){
         //   if(e.getAttribute('class').includes('mod_0') && $str==0)
@@ -174,18 +182,25 @@ function nextstage(){
     for(i=0;i<mod_list.length;i++){
         mod_list[i].setAttribute('style','background-color: White;');
     }
+    $('.ins.mod_'+$str).hide();
+    $(".del-text.mod_"+$str).attr('style','background-color:#fff; text-decoration:none;color:#000;');
     
+    $(".del-text.mod_"+($str-1)).attr('style','text-decoration:line-through; color:#f00;');
+    $('.ins.mod_'+($str-1)).show();
     $(".feedback[type_id="+($str-1)+"]").show();
     mod_list = $('span.mod_'+($str-1));
     for(i=0;i<mod_list.length;i++){
         e = mod_list[i];
         if(!e.getAttribute('class')) continue
-        else if(e.getAttribute('class').includes('mod_0'))
+        else if(e.getAttribute('class').includes('mod_0')){
           e.setAttribute('style','background-color: #ccf2ff ;');
-        else if(e.getAttribute('class').includes('mod_1'))
+        }
+        else if(e.getAttribute('class').includes('mod_1')){
           e.setAttribute('style','background-color: #ebf5d6 ;');
-        else if(e.getAttribute('class').includes('mod_2'))
+        }
+        else if(e.getAttribute('class').includes('mod_2')){
           e.setAttribute('style','background-color: #ffcce6 ;');
+        }
         // if(!e.getAttribute('class')) continue
         // else if($str != -1){
         //   if(e.getAttribute('class').includes('mod_0') && $str==0)
@@ -396,13 +411,14 @@ function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
     var ins_ele = $(".ins_"+(i_s-1));
     ins_ele.html("&nbsp;&nbsp;");
     ins_ele.addClass("ins-text");
+    ins_ele.addClass(e_type);
   }
   for(i=i_s;i<=i_e;i++){
     var e = document.getElementById(i.toString());
       // e.setAttribute('class',e_type);
     if(e==null) continue;
     
-    if(e_title == "Delete") e.classList.add("del-text");
+    if(e_title == "Delete") e.setAttribute("class","del-text "+e_type);
     else if(e_title == "Comment") e.classList.add(e_type);
 
     if(!visibility){
@@ -469,14 +485,29 @@ function loadJSON(jsonData){
   h = $('#origin').height()-60;
   document.getElementById('history').setAttribute('style','height: '+h+'px;');
 
+  $("span.ins").hide();
   if($str == -1){
     $(".mod_0").attr('style','background-color: #ccf2ff ;');
     $(".mod_1").attr('style','background-color: #ebf5d6 ;');
     $(".mod_2").attr('style','background-color: #ffcce6 ;');
+    $("span.ins").show();
   }else{
-    if($str == 0) $(".mod_0").attr('style','background-color: #ccf2ff ;');
-    else if($str == 1) $(".mod_1").attr('style','background-color: #ebf5d6 ;');
-    else if($str == 2) $(".mod_2").attr('style','background-color: #ffcce6 ;');
+    $(".del-text").attr('style','background-color:#fff; text-decoration:none;color:#000;');
+    if($str == 0){
+      $(".del-text.mod_0").attr('style','text-decoration:line-through; color:#f00;');
+      $(".mod_0").attr('style','background-color: #ccf2ff ;');
+      $(".ins.mod_0").show();
+    }
+    else if($str == 1){
+      $(".del-text.mod_1").attr('style','text-decoration:line-through; color:#f00;');
+      $(".mod_1").attr('style','background-color: #ebf5d6 ;');
+      $(".ins.mod_1").show();
+    }
+    else if($str == 2){
+      $(".del-text.mod_2").attr('style','text-decoration:line-through; color:#f00;');
+      $(".mod_2").attr('style','background-color: #ffcce6 ;');
+      $(".ins.mod_2").show();
+    }
   }
 
 }
@@ -628,6 +659,7 @@ $("#origin").on("click", "span.ins", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('i_start'))+1;
 
+  console.log(">>"+$str);
   if($str != -1){
     $this_list = document.querySelectorAll('.mod.mod_'+$str+".Insert");
   }else{
@@ -667,7 +699,7 @@ $("#origin").on("click", "span.ins", function () {
     }
   }
 });
-$("#origin").on("click", "span:not('.Insert')", function () {
+$("#origin").on("click", "span:not('.ins')", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('id'));
 
@@ -681,11 +713,12 @@ $("#origin").on("click", "span:not('.Insert')", function () {
   if($str != -1){
     //var $this_list = document.getElementsByClassName('mod mod_'+$str);
     $this_list = document.querySelectorAll('.mod.mod_'+$str+':not(.Insert)');
+
   }else{
     $this_list = document.querySelectorAll('.mod:not(.Insert)');
     //var $this_list = document.getElementsByClassName('mod');
   }
-  
+  console.log(")))"+$this_list.length);
   for(i=0;i<$this_list.length;i++){
     var i_s = parseInt($this_list[i].getAttribute('i_start'));
     var i_e = parseInt($this_list[i].getAttribute('i_end'));

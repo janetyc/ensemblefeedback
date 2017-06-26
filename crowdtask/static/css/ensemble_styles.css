@@ -112,7 +112,7 @@
 }
 .del-text{
   color: #ff0000;
-  text-decoration:line-through  
+  text-decoration:line-through;
 }
 .ins-text{
   background-color: #fff;
@@ -120,4 +120,9 @@
   background-repeat: no-repeat;
   width: 5px;
   height: 5px;
+}
+.disable-mode{
+  background-color: #fff !important;
+  background-image: none !important;
+  color: #000 !important;
 }
