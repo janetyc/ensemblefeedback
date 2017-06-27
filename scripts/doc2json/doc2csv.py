@@ -58,8 +58,18 @@ def parse_revision(soupDoc, soupCom):
                 print "comment end :%s" % commentID
                 print currentElement
 
-
-            re_history_str = element.find("t").string if element.find("t") else "None"
+            #----------------------------------------------------
+            re_history = [i.text for i in element.find_all("t")]
+            
+            if len(re_history):
+                re_history_str = "".join(re_history)
+            else:
+                if element.name == "ins":
+                    continue
+                else:
+                    re_history_str = ""
+                
+            #re_history_str = element.find("t").string if element.find("t") else "None"
             if element.name == "ins":
                 if (elementID != element["w:id"] and
                         ["index_end"] != index):
