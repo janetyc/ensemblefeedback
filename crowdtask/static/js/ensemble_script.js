@@ -419,6 +419,7 @@ function addMod(uid, id, e_type, i_s, i_e, e_title, hist, comment, visibility){
     if(e==null) continue;
     
     if(e_title == "Delete") e.setAttribute("class","del-text "+e_type);
+    else if(e_title == "Replace") e.setAttribute("class","del-text "+e_type);
     else if(e_title == "Comment") e.classList.add(e_type);
 
     if(!visibility){
