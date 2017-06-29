@@ -660,12 +660,12 @@ $("#origin").on("click", "span.ins", function () {
   var $t = $(this);
   var $id = parseInt($t.attr('i_start'))+1;
 
-  console.log(">>"+$str);
   if($str != -1){
     $this_list = document.querySelectorAll('.mod.mod_'+$str+".Insert");
   }else{
     $this_list = document.querySelectorAll('.mod.Insert');
   }
+
   for(i=0;i<$this_list.length;i++){
     var i_s = parseInt($this_list[i].getAttribute('i_start'));
     var i_e = parseInt($this_list[i].getAttribute('i_end'));
@@ -719,28 +719,25 @@ $("#origin").on("click", "span:not('.ins')", function () {
     $this_list = document.querySelectorAll('.mod:not(.Insert)');
     //var $this_list = document.getElementsByClassName('mod');
   }
-  console.log(")))"+$this_list.length);
+  
   for(i=0;i<$this_list.length;i++){
     var i_s = parseInt($this_list[i].getAttribute('i_start'));
     var i_e = parseInt($this_list[i].getAttribute('i_end'));
 
     if(i_s<= $id && i_e>= $id){
         var current = document.getElementById(i_s).classList.contains('loc-selected');
-        
+
         if(!current){
           $('.loc-selected').removeClass('loc-selected');
           $('.feedback-selected').removeClass('feedback-selected');
           // $this_list[i].parentNode.classList.remove('feedback-selected');
         }
-        for(i_x=i_s;i_x<=i_e;i_x++){
-          if(current){
-            $this_list[i].parentNode.classList.remove('feedback-selected');
-            document.getElementById(i_x).classList.remove('loc-selected');
-          }
-          else{
-            $this_list[i].parentNode.classList.add('feedback-selected');
-            document.getElementById(i_x).classList.add('loc-selected');
-          }
+        if($t.hasClass('loc-selected')){
+          $('.loc-selected').removeClass('loc-selected');
+          $('.feedback-selected').removeClass('feedback-selected');
+        }else{
+          $('.loc-hovered').addClass('loc-selected');
+          $('.feedback-hovered').addClass('feedback-selected');  
         }
 
         $offset = $('#'+i_s).offset();
